@@ -5,7 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using OrderApi.Data.Database;
+using OrderApi.Data.Repository.v1;
+using OrderApi.Domain;
 using OrderApi.Messaging.Receive.Options.v1;
+using OrderApi.Messaging.Receive.Receiver.v1;
+using OrderApi.Service.v1.Command;
+using OrderApi.Service.v1.Query;
+using OrderApi.Service.v1.Services;
 
 namespace OrderApi {
     public class Startup {
@@ -78,7 +86,21 @@ namespace OrderApi {
             });
 
 
+            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ICustomerNameUpdateService).Assembly);
 
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IValidator<OrderModel>, OrderModelValidator>();
+
+            services.AddTransient<IRequestHandler<GetPaidOrderQuery, List<Order>>, GetPaidOrderQueryHandler>();
+            services.AddTransient<IRequestHandler<GetOrderByIdQuery, Order>, GetOrderByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetOrderByCustomerGuidQuery, List<Order>>, GetOrderByCustomerGuidQueryHandler>();
+            services.AddTransient<IRequestHandler<CreateOrderCommand, Order>, CreateOrderCommandHandler>();
+            services.AddTransient<IRequestHandler<PayOrderCommand, Order>, PayOrderCommandHandler>();
+            services.AddTransient<IRequestHandler<UpdateOrderCommand>, UpdateOrderCommandHandler>();
+            services.AddTransient<ICustomerNameUpdateService, CustomerNameUpdateService>();
+
+
+            services.AddHostedService<CustomerFullNameUpdateReceiver>();
 
         }
 
@@ -86,11 +108,18 @@ namespace OrderApi {
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+            } else {
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API V1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
