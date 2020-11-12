@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 
 namespace StringMatching {
     class Program {
-        static void Main(string[] args) {
+        static void Main2(string[] args) {
             char[] text1 = "BBC ABCDAB ABCDABCDABDE".ToCharArray();
             char[] pattern1 = "ABCDABD".ToCharArray();
 

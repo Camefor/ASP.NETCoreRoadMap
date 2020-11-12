@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ConsoleApp1 {
     class Data {
@@ -27,23 +28,99 @@ namespace ConsoleApp1 {
     }
 
 
+    /// <summary>
+    /// 中药方剂
+    /// </summary>
+    public class Medicine {
+
+        public List<string> text { get; set; }
+        public List<string> img { get; set; }
+
+    }
+
+
     public class Program {
         static HtmlParser htmlParser = new HtmlParser();
         static readonly HttpClient client = new HttpClient();
         static HttpWebRequest myReq;
-        static string MTsFilePath = System.AppDomain.CurrentDomain.BaseDirectory + "\\显微1\\";  // +N.ts
+        static string MTsFilePath = System.AppDomain.CurrentDomain.BaseDirectory + "\\中药方剂图像\\";   
         static string FinallyPath = String.Empty;
+
+
 
         //======================Main Function======================
         static void Main(string[] args) {
 
-
+            GetImageFromWeb2();
 
             Console.ReadKey();
         }
         //======================Main Function======================
 
+        /// <summary>
+        /// 中药方剂图像
+        /// </summary>
+        private static void GetImageFromWeb2() {
+            List<Medicine> medicineList = new List<Medicine>();
+            int TotalPageId = 46;//总共页数
 
+
+            if (!System.IO.Directory.Exists(MTsFilePath)) {
+                System.IO.Directory.CreateDirectory(MTsFilePath);
+            }
+
+            for (int pageId = 1; pageId <= TotalPageId; pageId++) {
+                Console.WriteLine($"开始 第 {pageId} 页下载任务.");
+
+                #region "构造请求地址"
+                var Mic_sourceUrl = @$"https://sys02.lib.hkbu.edu.hk/cmfid/index.asp?query=&lang=chs&pageid={pageId}";
+                #endregion "构造请求地址"
+
+                //加载HTML
+                var sourceHtmlDom = AnalyticalContent.GetHtml(Mic_sourceUrl);//下载显微鉴别 类型的
+                //HTML 解析成 IDocument对象
+                var dom = htmlParser.ParseDocument(sourceHtmlDom);
+                //解析 提取
+                #region "提取目标"
+                var textItems = dom.QuerySelectorAll("table#main_content_tb tbody tr td font a");//元素选择器
+                var imgItems = dom.QuerySelectorAll("table#main_content_tb tbody tr td a img");//元素选择器
+
+                Medicine medicine = new Medicine {
+                    text = new List<string>(),
+                    img = new List<string>()
+                };
+
+                for (int i = 0; i < 4; i++) {
+                    //拿到文字
+                    var txt = textItems[i].InnerHtml;
+                    medicine.text.Add(txt);
+
+                    //拿到图片地址
+                    var ImgUrl = "https://sys02.lib.hkbu.edu.hk/cmfid/" + imgItems[i].GetAttribute("src");
+                    medicine.img.Add(ImgUrl);
+
+                    //保存图片
+                    //D:\Documents\ASP.NETCorRoadMap\src\ASP.NETCorRoadMap\ConsoleApp1\bin\Debug\netcoreapp3.1\中药方剂图像\xx.jpg
+                    var oneFileName = txt + Path.GetExtension(ImgUrl);
+                    FinallyPath = Path.Combine(MTsFilePath, oneFileName);
+                    AnalyticalContent.GetImgRes(ImgUrl, FinallyPath);
+                }
+
+                medicineList.Add(medicine);
+
+                #endregion "提取目标"
+
+
+                Console.WriteLine($"结束 第 {pageId} 页下载任务.");
+                Console.WriteLine("===========================================");
+
+            }
+        }
+
+        #region "之前的显微鉴别"
+        /// <summary>
+        /// 之前的显微鉴别
+        /// </summary>
         private static void GetImageFromWeb() {
             if (!System.IO.Directory.Exists(MTsFilePath)) {
                 System.IO.Directory.CreateDirectory(MTsFilePath);
@@ -76,19 +153,17 @@ namespace ConsoleApp1 {
 
                 #endregion ""
 
+
                 //加载HTML
-                //var sourceHtmlDom = GetHtml3(sourceUrl);//之前
-                var sourceHtmlDom = GetHtml(Mic_sourceUrl);//下载显微鉴别 类型的
-
-                //HTML 解析成 IDocument
+                var sourceHtmlDom = AnalyticalContent.GetHtml(Mic_sourceUrl);//下载显微鉴别 类型的
+                //HTML 解析成 IDocument对象
                 var dom = htmlParser.ParseDocument(sourceHtmlDom);
-
                 //解析 提取
                 #region "提取目标名称"
                 var fileName = dom.QuerySelectorAll("p.text2");
                 if (fileName != null) {
                     foreach (var p in fileName) {
-                        var name = HtmlToPlainText(p.InnerHtml);// 沉香 Chenxiang
+                        var name = AnalyticalContent.HtmlToPlainText(p.InnerHtml);// 沉香 Chenxiang
 
                         if (!string.IsNullOrEmpty(name)) {
                             name = name.Trim();
@@ -102,7 +177,7 @@ namespace ConsoleApp1 {
                             var bottomTxt = dom.QuerySelectorAll("p.text");
                             if (bottomTxt != null) {
                                 foreach (var t in bottomTxt) {
-                                    var txt = HtmlToPlainText(t.InnerHtml);// 沉香 Chenxiang
+                                    var txt = AnalyticalContent.HtmlToPlainText(t.InnerHtml);// 沉香 Chenxiang
                                     txt = txt.Split("本记录")[0];
                                     txt = txt.Replace(">", "");
                                     var secondDir = Path.Combine(MTsFilePath, data.text);
@@ -111,11 +186,6 @@ namespace ConsoleApp1 {
                                     }
                                     var oneFileName = data.text + ".txt";
                                     var fPath = Path.Combine(secondDir, oneFileName);
-                                    //不存在 创建文件
-                                    //if (!System.IO.File.Exists(fPath)) {
-                                    //    System.IO.File.Create(fPath);
-                                    //}
-
                                     FileInfo myFile = new FileInfo(fPath);
                                     StreamWriter sw = myFile.CreateText();
                                     string[] strs = { txt };
@@ -128,7 +198,6 @@ namespace ConsoleApp1 {
 
                                 }
                             }
-
                             #endregion "提取底部文字"
 
                             #region "提取目标图片地址"
@@ -144,19 +213,15 @@ namespace ConsoleApp1 {
                                         var findSrc = "http://libproject.hkbu.edu.hk" + s;//"http://libproject.hkbu.edu.hk/../trsimage/mmd/B00421.jpg"
                                         Console.WriteLine($"资源地址: { findSrc}");
                                         data.imgs.Add(findSrc);
-
-
                                         //下载
                                         var secondDir = Path.Combine(MTsFilePath, data.text);
                                         if (!System.IO.Directory.Exists(secondDir)) {
                                             System.IO.Directory.CreateDirectory(secondDir);
                                         }
                                         count++;
-
-
                                         var oneFileName = count.ToString() + Path.GetExtension(findSrc);
                                         FinallyPath = Path.Combine(secondDir, oneFileName);
-                                        GetImgRes(findSrc, FinallyPath);
+                                        AnalyticalContent.GetImgRes(findSrc, FinallyPath);
                                     }
                                 }
                             }
@@ -168,62 +233,9 @@ namespace ConsoleApp1 {
 
             }
         }
+        #endregion "之前的显微鉴别"
 
-        static void GetImgRes(string imgUrl, string fullPath) {
-            try {
-                HttpResponseMessage response = client.GetAsync(imgUrl).Result;
-                response.EnsureSuccessStatusCode();
-                var respnseBody = response.Content.ReadAsByteArrayAsync().Result;
-                var resStream = response.Content.ReadAsStreamAsync().Result;
 
-                if (System.IO.File.Exists(fullPath)) {
-                    System.IO.File.Delete(fullPath);
-                }
-
-                //https://blog.lindexi.com/post/C-dotnet-%E5%B0%86-Stream-%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95.html
-                using (var fileStream = File.Create(fullPath)) {
-                    resStream.Seek(0, SeekOrigin.Begin);
-                    resStream.CopyTo(fileStream);
-                }
-                Console.WriteLine("任务结束，成功保存文件");
-                Console.WriteLine();
-            } catch (Exception ex) {
-                Console.WriteLine("保存文件错误" + ex.Message);
-            }
-        }
-        private static string HtmlToPlainText(string html) {
-            const string tagWhiteSpace = @"(>|$)(\W|\n|\r)+<";//matches one or more (white space or line breaks) between '>' and '<'
-            const string stripFormatting = @"<[^>]*(>|$)";//match any character between '<' and '>', even when end tag is missing
-            const string lineBreak = @"<(br|BR)\s{0,1}\/{0,1}>";//matches: <br>,<br/>,<br />,<BR>,<BR/>,<BR />
-            var lineBreakRegex = new Regex(lineBreak, RegexOptions.Multiline);
-            var stripFormattingRegex = new Regex(stripFormatting, RegexOptions.Multiline);
-            var tagWhiteSpaceRegex = new Regex(tagWhiteSpace, RegexOptions.Multiline);
-
-            var text = html;
-            //Decode html specific characters
-            text = System.Net.WebUtility.HtmlDecode(text);
-            //Remove tag whitespace/line breaks
-            text = tagWhiteSpaceRegex.Replace(text, "><");
-            //Replace <br /> with line breaks
-            text = lineBreakRegex.Replace(text, Environment.NewLine);
-            //Strip formatting
-            text = stripFormattingRegex.Replace(text, string.Empty);
-            return text;
-        }
-        static public string GetHtml(string url) {
-            HttpWebRequest myReq =
-            (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)myReq.GetResponse();
-            // Get the stream associated with the response.
-            Stream receiveStream = response.GetResponseStream();
-            if (response.StatusCode == HttpStatusCode.OK) {
-                Console.WriteLine("获取Html成功");
-            }
-            // Pipes the stream to a higher level stream reader with the required encoding format. 
-            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
-
-            return readStream.ReadToEnd();
-        }
 
         public static Stream GetHtmlStream(string url) {
             Thread.Sleep(200);
@@ -241,14 +253,9 @@ namespace ConsoleApp1 {
 
         }
 
+        public static string GetHtml_bro(string url, Encoding ed = null) {
+            if (ed == null) ed = Encoding.UTF8;
 
-
-        public static string GetHtml3(string url) {
-            return GetHtml_bro(url, Encoding.UTF8);
-        }
-
-
-        public static string GetHtml_bro(string url, Encoding ed) {
             string Html = string.Empty;//初始化新的webRequst
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(url);
 

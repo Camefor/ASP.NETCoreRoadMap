@@ -1,10 +1,10 @@
-{
+﻿{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:62098/",
-      "sslPort": 44380
+      "applicationUrl": "http://localhost:41642",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -15,13 +15,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "RedisDemo": {
+    "HelloDotNet5": {
       "commandName": "Project",
+      "dotnetRunMessages": "true",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:5000"
+      }
     }
   }
 }
