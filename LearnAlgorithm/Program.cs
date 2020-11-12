@@ -3,15 +3,23 @@ using System.Collections.Generic;
 
 namespace LearnAlgorithm {
     class Program {
+
+        public int age { get; set ; }
+
+
         static void Main(string[] args) {
             Console.WriteLine("Hello World!");
-            var result = SearchInsert();
-            Console.WriteLine(result);
-
+            int[] arr = { 1, 43, 6, 22, 67, 2323 };
+            foreach (var item in BubbleSort(arr)) {
+                Console.Write(item + ", ");
+            }
             Console.ReadKey();
         }
 
-
+        /// <summary>
+        /// 搜索插入位置 
+        /// </summary>
+        /// <returns></returns>
         static int SearchInsert() {
             int[] nums = { 1, 3, 5, 6 };
             int target = 5;
@@ -25,6 +33,7 @@ namespace LearnAlgorithm {
             }
             return nums.Length;
         }
+
         /// <summary>
         /// 搜索插入位置 二分查找
         /// </summary>
@@ -103,21 +112,24 @@ namespace LearnAlgorithm {
             return 0;
         }
 
-        static int[] bubble_sort() {
-            int[] unsorted = { 6, 2, 4, 1, 5, 9 };
-            for (int i = 0; i < unsorted.Length; i++) {
-                for (int j = i; j < unsorted.Length; j++) {
-                    if (unsorted[i] > unsorted[j]) {
-                        int temp = unsorted[i];
-                        unsorted[i] = unsorted[j];
-                        unsorted[j] = temp;
+
+        public static int[] BubbleSort(int[] array) {
+            int length = array.Length;
+
+            for (int i = 0; i < length; i++) {
+                for (int j = i; j < length; j++) {
+                    if (array[i] > array[j]) {
+                        int temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
                     }
                 }
             }
-            return unsorted;
+            return array;
         }
 
-        public int[] sort(int[] array) {
+
+        public static int[] sort(int[] array) {
             int length = array.Length;
             if (length > 0) {
                 for (int i = 1; i < length; i++) {
@@ -127,13 +139,11 @@ namespace LearnAlgorithm {
                             array[j] = array[j + 1];
                             array[j + 1] = temp;
                         }
-
                     }
                 }
             }
             return array;
         }
-
 
 
     }
