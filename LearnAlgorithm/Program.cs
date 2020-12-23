@@ -4,23 +4,23 @@ using System.Collections.Generic;
 namespace LearnAlgorithm {
     class Program {
 
-        public int age { get; set ; }
+        public int age { get; set; }
 
-
-        static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
-            int[] arr = { 1, 43, 6, 22, 67, 2323 };
-            foreach (var item in BubbleSort(arr)) {
-                Console.Write(item + ", ");
+        static void Main (string[] args) {
+            LearnAlgorithm.microsoft.General general = new microsoft.General ();
+            int[] a = { 1, 3, 4, 2 };
+            int[] b = { 5, 3, 4 };
+            var res = general.Merge (a, b);
+            foreach (var item in res) {
+                System.Console.WriteLine (item);
             }
-            Console.ReadKey();
         }
 
         /// <summary>
         /// 搜索插入位置 
         /// </summary>
         /// <returns></returns>
-        static int SearchInsert() {
+        static int SearchInsert () {
             int[] nums = { 1, 3, 5, 6 };
             int target = 5;
             for (int i = 0; i < nums.Length; i++) {
@@ -40,7 +40,7 @@ namespace LearnAlgorithm {
         /// <param name="nums"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public int SearchInsert2(int[] nums, int target) {
+        public int SearchInsert2 (int[] nums, int target) {
             int left = 0;
             int right = nums.Length - 1;
             int mid = 0;
@@ -57,10 +57,10 @@ namespace LearnAlgorithm {
         ///寻找数组的中心索引  前缀和
         /// </summary>
         /// <returns></returns>
-        static int PivotIndex2() {
+        static int PivotIndex2 () {
             int[] nums = { 1, 7, 3, 6, 5, 6 };
             int sum = 0, leftsum = 0;
-            foreach (var item in nums) sum += item;//数组和
+            foreach (var item in nums) sum += item; //数组和
 
             for (int i = 0; i < nums.Length; i++) {
                 if (leftsum == sum - leftsum - nums[i]) return i;
@@ -69,7 +69,6 @@ namespace LearnAlgorithm {
             return -1;
         }
 
-
         /// <summary>
         /// 寻找数组的中心索引:<br/> <see cref="https://leetcode-cn.com/problems/find-pivot-index/"/>
         /// 给定一个整数类型的数组 nums，请编写一个能够返回数组 “中心索引” 的方法。<br/>
@@ -77,7 +76,7 @@ namespace LearnAlgorithm {
         /// 如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。<br/>
         /// </summary>
         /// <returns></returns>
-        static int PivotIndex() {
+        static int PivotIndex () {
             int[] nums = { 1, 7, 3, 6, 5, 6 };
             if (nums.Length == 0) return -1;
             for (int i = 0; i < nums.Length; i++) {
@@ -99,21 +98,20 @@ namespace LearnAlgorithm {
             return -1;
         }
 
-        static int FindRepeatNumber() {
-            int[] nums = { 2, 3, 1, 0, 2, 5, 3 };
-            Dictionary<int, int> dic = new Dictionary<int, int>();
+        static int FindRepeatNumber () {
+            int[] nums = { 8, 3, 1, 6 };
+            Dictionary<int, int> dic = new Dictionary<int, int> ();
             for (int i = 0; i < nums.Length; i++) {
-                if (dic.ContainsKey(nums[i])) {
+                if (dic.ContainsKey (nums[i])) {
                     return nums[i];
                 } else {
-                    dic.Add(nums[i], nums[i]);
+                    dic.Add (nums[i], nums[i]);
                 }
             }
             return 0;
         }
 
-
-        public static int[] BubbleSort(int[] array) {
+        public static int[] BubbleSort (int[] array) {
             int length = array.Length;
 
             for (int i = 0; i < length; i++) {
@@ -128,8 +126,7 @@ namespace LearnAlgorithm {
             return array;
         }
 
-
-        public static int[] sort(int[] array) {
+        public static int[] sort (int[] array) {
             int length = array.Length;
             if (length > 0) {
                 for (int i = 1; i < length; i++) {
@@ -144,7 +141,6 @@ namespace LearnAlgorithm {
             }
             return array;
         }
-
 
     }
 }
