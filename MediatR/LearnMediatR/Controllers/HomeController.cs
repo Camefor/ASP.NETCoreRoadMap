@@ -19,12 +19,12 @@ namespace LearnMediatR.Controllers {
         public string SayHello { get; set; }
     }
 
-    public class SayHelloCommandHandler : IRequestHandler<SayHelloCommand, string> {
-        public async Task<string> Handle(SayHelloCommand request, CancellationToken cancellationToken) {
+    public class SayHelloCommandHandler : IRequestHandler<SayHelloCommand , string> {
+        public async Task<string> Handle(SayHelloCommand request , CancellationToken cancellationToken) {
             //业务逻辑
             //这里是sayHello
             await Task.CompletedTask;
-            if (request.SayHello !=null) {
+            if (request.SayHello != null) {
                 return request.SayHello;
             }
             return "Hello";
@@ -34,7 +34,7 @@ namespace LearnMediatR.Controllers {
         private readonly ILogger<HomeController> _logger;
         private readonly IMyService _myService;
         private readonly IMediator _mediator;
-        public HomeController(ILogger<HomeController> logger, IMediator mediator, IMyService myService) {
+        public HomeController(ILogger<HomeController> logger , IMediator mediator , IMyService myService) {
             _logger = logger;
             _mediator = mediator;
             _myService = myService;
@@ -58,7 +58,7 @@ namespace LearnMediatR.Controllers {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0 , Location = ResponseCacheLocation.None , NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
