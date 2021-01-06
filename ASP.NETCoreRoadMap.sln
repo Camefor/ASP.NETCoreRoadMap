@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMediatR", "LearnMediatR\LearnMediatR.csproj", "{541B4ED6-6E1F-42DA-91E7-990070231E02}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetCoreMicroServices", "DotNetCoreMicroServices", "{793E746D-E52A-4776-A8A3-F110E13C923C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderMicroService", "OrderMicroService", "{E5FC0A1A-7168-4349-A1E8-F00BD335D743}"
@@ -41,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloDotNet5", "HelloDotNet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{CE08C5BB-A4C5-4333-B2FA-A7A8A1BC0686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnElasticsearch", "DataBase\LearnElasticsearch\LearnElasticsearch.csproj", "{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnElasticsearch", "DataBase\LearnElasticsearch\LearnElasticsearch.csproj", "{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMediatR", "MediatR\LearnMediatR\LearnMediatR.csproj", "{4EF26E46-A883-4EA0-AE63-5ED258EB003B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{541B4ED6-6E1F-42DA-91E7-990070231E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{541B4ED6-6E1F-42DA-91E7-990070231E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{541B4ED6-6E1F-42DA-91E7-990070231E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{541B4ED6-6E1F-42DA-91E7-990070231E02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB309F0D-86EC-46CD-A1B4-52E77905B6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB309F0D-86EC-46CD-A1B4-52E77905B6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB309F0D-86EC-46CD-A1B4-52E77905B6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,12 +89,15 @@ Global
 		{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF26E46-A883-4EA0-AE63-5ED258EB003B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF26E46-A883-4EA0-AE63-5ED258EB003B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF26E46-A883-4EA0-AE63-5ED258EB003B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF26E46-A883-4EA0-AE63-5ED258EB003B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{541B4ED6-6E1F-42DA-91E7-990070231E02} = {9103BD62-FC0E-4B35-969E-B1951B0F95A9}
 		{E5FC0A1A-7168-4349-A1E8-F00BD335D743} = {793E746D-E52A-4776-A8A3-F110E13C923C}
 		{D783C597-ED13-4CC9-BD71-9A67F2C2BBF2} = {793E746D-E52A-4776-A8A3-F110E13C923C}
 		{FB309F0D-86EC-46CD-A1B4-52E77905B6F1} = {E5FC0A1A-7168-4349-A1E8-F00BD335D743}
@@ -111,6 +110,7 @@ Global
 		{0F0E130A-6EA5-455F-8659-6A94F71FD6DD} = {444E65A8-10CA-4E9E-A534-1F2C908DADC6}
 		{33415D7C-FFCB-4680-9A4A-89C01C114684} = {B5F54A58-1C50-40D6-A126-83FB8827A699}
 		{D0AD81E6-8494-4F59-9E5D-8EF4E0831EBE} = {CE08C5BB-A4C5-4333-B2FA-A7A8A1BC0686}
+		{4EF26E46-A883-4EA0-AE63-5ED258EB003B} = {9103BD62-FC0E-4B35-969E-B1951B0F95A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}

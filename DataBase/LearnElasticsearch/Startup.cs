@@ -1,8 +1,10 @@
+using Elasticsearch.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,18 @@ namespace LearnElasticsearch {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
+
+
+            //curl -XPOST localhost:9200/books/book/_bulk --data-binary @sample-data.json -H "Content-Type: application/json"
+            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:5000"));
+            var settings = new ConnectionSettings(pool).DefaultIndex("books");
+            var client = new ElasticClient(settings);
+            services.AddSingleton(client);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
