@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LearnElasticsearch</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/vendor/EMFJS.bundle.js"></script>
+    <script src="~/vendor/RTFJS.bundle.js"></script>
+    <script src="~/vendor/WMFJS.bundle.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        var rtf;
+
+        $(function () {
+
+
+            var url = "http://localhost:65183/files/001.rtf";
+            rtf = download(url);
+
+            RTFJS.loggingEnabled(false);//日志
+            WMFJS.loggingEnabled(false);
+            EMFJS.loggingEnabled(false);
+            const doc = new RTFJS.Document(stringToArrayBuffer(rtf));
+            const meta = doc.metadata();
+            doc.render().then(function (htmlElements) {
+                console.log("Meta:");
+                console.log(meta);
+                console.log("Html:");
+                console.log(htmlElements);
+
+                for (var i = 0; i < htmlElements.length; i++) {
+                    document.write(htmlElements[i].innerHTML);
+                    document.write("<br />");
+                    
+                }
+
+            }).catch(error => console.error(error))
+
+        });
+
+        function stringToArrayBuffer(string) {
+            const buffer = new ArrayBuffer(string.length);
+            const bufferView = new Uint8Array(buffer);
+            for (let i = 0; i < string.length; i++) {
+                bufferView[i] = string.charCodeAt(i);
+            }
+            return buffer;
+        }
+
+        function download(url) {
+            let res = '';
+            $.ajax({
+                url: url,
+                async: false,//确保代码同步执行 按js执行顺序同步执行
+                success: function (data) {
+                    res = data;
+                }
+            });
+            return res;
+        }
+
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+        </main>
+    </div>
+    
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - LearnElasticsearch - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+</body>
+</html>

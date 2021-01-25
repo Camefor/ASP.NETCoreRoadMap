@@ -34,7 +34,12 @@ namespace LearnMediatR {
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions {
+                //FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory()),
+                //设置不限制content-type 该设置可以下载所有类型的文件，但是不建议这么设置，因为不安全
+                ServeUnknownFileTypes = true
 
+            });
             app.UseRouting();
 
             app.UseAuthorization();
