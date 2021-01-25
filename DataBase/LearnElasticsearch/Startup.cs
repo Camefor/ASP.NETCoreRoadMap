@@ -23,10 +23,18 @@ namespace LearnElasticsearch {
 
 
             //curl -XPOST localhost:9200/books/book/_bulk --data-binary @sample-data.json -H "Content-Type: application/json"
-            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:5000"));
+            var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
             var settings = new ConnectionSettings(pool).DefaultIndex("books");
             var client = new ElasticClient(settings);
             services.AddSingleton(client);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy" ,
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +46,8 @@ namespace LearnElasticsearch {
             }
             app.UseStaticFiles();
 
+            app.UseCors("CorsPolicy");
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
