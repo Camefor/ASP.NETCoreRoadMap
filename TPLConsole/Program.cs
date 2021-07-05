@@ -273,7 +273,7 @@ namespace TPLConsole
 
                     //顺序执行
                     db.ExecuteSql(sqlBuilder.ToString());
-                    //db.ExecuteSql(sqlBuilder_History.ToString());
+                    db.ExecuteSql(sqlBuilder_History.ToString());
 
                     //开启线程处理
                     //Task.Run(() =>
