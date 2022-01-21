@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetCoreMicroServices", "DotNetCoreMicroServices", "{793E746D-E52A-4776-A8A3-F110E13C923C}"
 EndProject
@@ -55,7 +55,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisHelper", "RedisHelper\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dll", "Dll", "{6492907A-CA95-4BD2-82F4-BF6AC96B3FD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbnormalDetermination", "AbnormalDetermination\AbnormalDetermination.csproj", "{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbnormalDetermination", "AbnormalDetermination\AbnormalDetermination.csproj", "{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueueAndBus", "QueueAndBus", "{1715625C-C8FE-4C75-9EBE-59DFEFD76237}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LearnEasyNetQ", "LearnEasyNetQ", "{11840564-C7E9-46D1-8C46-AF90AF3FF159}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publisher", "QueueAndBus\LearnEasyNetQ\Publisher\Publisher.csproj", "{66C48F20-A759-4AD2-8BBE-47C30AFAD06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subscriber", "QueueAndBus\LearnEasyNetQ\Subscriber\Subscriber.csproj", "{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextMessageLib", "QueueAndBus\LearnEasyNetQ\TextMessageLib\TextMessageLib.csproj", "{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +129,18 @@ Global
 		{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C48F20-A759-4AD2-8BBE-47C30AFAD06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C48F20-A759-4AD2-8BBE-47C30AFAD06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C48F20-A759-4AD2-8BBE-47C30AFAD06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C48F20-A759-4AD2-8BBE-47C30AFAD06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +162,10 @@ Global
 		{EF9E14E2-1EEB-4923-926B-CD615846985A} = {DA0C10A9-BABB-4961-AD2C-581D930C9176}
 		{0AD96754-F793-4195-BB5D-27F4E3F77569} = {B341B86A-4169-46A0-B949-7BE8C07AE490}
 		{C53914E4-F5B5-4E84-8F86-1DDEE6F0C939} = {6492907A-CA95-4BD2-82F4-BF6AC96B3FD5}
+		{11840564-C7E9-46D1-8C46-AF90AF3FF159} = {1715625C-C8FE-4C75-9EBE-59DFEFD76237}
+		{66C48F20-A759-4AD2-8BBE-47C30AFAD06D} = {11840564-C7E9-46D1-8C46-AF90AF3FF159}
+		{E60F2B62-5B95-4A38-A893-FD74EE4B8E4A} = {11840564-C7E9-46D1-8C46-AF90AF3FF159}
+		{DCEF4EF1-D7E1-4003-A5E8-82C86A0C50FF} = {11840564-C7E9-46D1-8C46-AF90AF3FF159}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
