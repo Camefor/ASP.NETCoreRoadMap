@@ -10,17 +10,33 @@ LogProvider.SetCurrentLogProvider(ConsoleLogProvider.Instance);
 
 using (var bus = RabbitHutch.CreateBus("host=localhost"))
 {
+    //for (int i = 0; i < 800000; i++)
+    //{
+    //    bus.PubSub.Publish(new TextMessage { Text = "这是测试消息：" + i });
+    //    Console.WriteLine("Message published!");
+    //}
 
-    for (int i = 0; i < 800000; i++)
-    {
-        bus.PubSub.Publish(new TextMessage { Text = "这是测试消息：" + i });
-        Console.WriteLine("Message published!");
-    }
     var input = string.Empty;
     Console.WriteLine("Enter a message. 'Quit' to quit.");
     while ((input = Console.ReadLine()) != "Quit")
     {
-        bus.PubSub.Publish(new TextMessage { Text = input });
+        var newMsg = string.Empty;
+
+
+        //using Subscribers
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 ";
+        bus.PubSub.Publish(new TextMessage { Text = newMsg });
+
+
+        //------------>我是分割线---------------->
+        Thread.Sleep(1000);
+
+        //using Send
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用 发送/接收 模式 ";
+        ISendReceive Isend = bus.SendReceive;
+        Isend.Send("my.queue", new TextMessage { Text = newMsg });
+
+
         Console.WriteLine("Message published!");
     }
 }
