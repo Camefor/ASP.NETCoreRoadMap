@@ -24,18 +24,23 @@ using (var bus = RabbitHutch.CreateBus("host=localhost"))
 
 
         //using Subscribers
-        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 ";
-        bus.PubSub.Publish(new TextMessage { Text = newMsg });
+
+        //普通发布
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 、普通发布 ";
+        //bus.PubSub.Publish(new TextMessage { Text = newMsg });
+
+
+        //消息路由（Topic Based Routing）: https://www.cnblogs.com/panzi/p/6337568.html#!comments
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 、消息路由 ";
+        bus.PubSub.Publish(new TextMessage { Text = newMsg }, "X.A");
 
 
         //------------>我是分割线---------------->
         Thread.Sleep(1000);
 
         //using Send
-        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用 发送/接收 模式 ";
-        ISendReceive Isend = bus.SendReceive;
-        Isend.Send("my.queue", new TextMessage { Text = newMsg });
-
+        //newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用 发送/接收 模式 ";
+        //bus.SendReceive.Send("my.queue", new TextMessage { Text = newMsg });
 
         Console.WriteLine("Message published!");
     }
