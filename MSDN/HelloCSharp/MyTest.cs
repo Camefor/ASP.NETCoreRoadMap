@@ -69,19 +69,15 @@ namespace HelloCSharp
             //eatFood2 += Methond3;
             //Animal mammal_new = eatFood2(new Mammal());
 
-
             Con_EatFood eat = Con_Methond1;
             var d = eat(new Animal());
 
         }
-
         public static Mammal Con_Methond1(Animal animal)
         {
-
             Console.WriteLine("处理数据代码");
             return new Mammal();
         }
-
 
         public static Mammal Methond1(Mammal mammal)
         {
@@ -103,10 +99,7 @@ namespace HelloCSharp
             return new Animal();
         }
 
-
-
         public delegate Animal EatFood(Mammal an);
-
 
         public delegate Animal Con_EatFood(Animal an);
 
