@@ -10,17 +10,38 @@ LogProvider.SetCurrentLogProvider(ConsoleLogProvider.Instance);
 
 using (var bus = RabbitHutch.CreateBus("host=localhost"))
 {
+    //for (int i = 0; i < 800000; i++)
+    //{
+    //    bus.PubSub.Publish(new TextMessage { Text = "这是测试消息：" + i });
+    //    Console.WriteLine("Message published!");
+    //}
 
-    for (int i = 0; i < 800000; i++)
-    {
-        bus.PubSub.Publish(new TextMessage { Text = "这是测试消息：" + i });
-        Console.WriteLine("Message published!");
-    }
     var input = string.Empty;
     Console.WriteLine("Enter a message. 'Quit' to quit.");
     while ((input = Console.ReadLine()) != "Quit")
     {
-        bus.PubSub.Publish(new TextMessage { Text = input });
+        var newMsg = string.Empty;
+
+
+        //using Subscribers
+
+        //普通发布
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 、普通发布 ";
+        //bus.PubSub.Publish(new TextMessage { Text = newMsg });
+
+
+        //消息路由（Topic Based Routing）: https://www.cnblogs.com/panzi/p/6337568.html#!comments
+        newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用  订阅/发布 模式 、消息路由 ";
+        bus.PubSub.Publish(new TextMessage { Text = newMsg }, "X.A");
+
+
+        //------------>我是分割线---------------->
+        Thread.Sleep(1000);
+
+        //using Send
+        //newMsg = $"数据时间：{ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} . 数据： {input},使用 发送/接收 模式 ";
+        //bus.SendReceive.Send("my.queue", new TextMessage { Text = newMsg });
+
         Console.WriteLine("Message published!");
     }
 }
