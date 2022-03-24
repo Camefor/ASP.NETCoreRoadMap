@@ -1,5 +1,5 @@
 # ASP.NETCoreRoadMap
-学习.net core
+learn .net core 
 
 # 2022 加油
 
@@ -9,3 +9,6 @@
 ## 设计模式-DesignPatterns
 ## 语言语法-LanguageSyntax
 ## 库和框架-LibraryAndFramework
+
+
+路线图：https://github.com/MoienTajik/AspNetCore-Developer-Roadmap
