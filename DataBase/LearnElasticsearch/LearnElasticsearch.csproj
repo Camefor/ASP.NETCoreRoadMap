@@ -5,22 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NEST" Version="7.10.1" />
+    <Compile Remove="wwwroot\rtfdemo\**" />
+    <Content Remove="wwwroot\rtfdemo\**" />
+    <EmbeddedResource Remove="wwwroot\rtfdemo\**" />
+    <None Remove="wwwroot\rtfdemo\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\hyperlink.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simple1.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simple2.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simple3.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simple4.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simple5.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simplepict.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simplepng.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\rtf\simplepngbin.rtf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\data\wmf\rtf.js.wmf" />
-    <None Include="wwwroot\rtfdemo\samples\.common\dep\jquery.binarytransport.js" />
-    <None Include="wwwroot\rtfdemo\samples\.common\dep\jquery.min.js" />
+    <PackageReference Include="NEST" Version="7.10.1" />
   </ItemGroup>
 
 </Project>
