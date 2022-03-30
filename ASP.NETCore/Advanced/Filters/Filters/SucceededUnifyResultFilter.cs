@@ -111,6 +111,24 @@ namespace Filters
     }
 
 
+    public class ShortCircuitingResourceFilterAttribute : Attribute, IResourceFilter
+    {
+        public void OnResourceExecuted(ResourceExecutedContext context)
+        {
+        }
+
+        public void OnResourceExecuting(ResourceExecutingContext context)
+        {
+            //取消和设置短路
+            //请求api 直接返回了结果 没有继续执行 action 
+            context.Result = new ContentResult
+            {
+                Content = nameof(ShortCircuitingResourceFilterAttribute)
+            };
+        }
+    }
+
+
     /**
      * 
      * 筛选器属性：
