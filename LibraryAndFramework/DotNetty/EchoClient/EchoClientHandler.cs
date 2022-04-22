@@ -11,8 +11,6 @@ namespace EchoClient
 
     public class EchoClientHandler : SimpleChannelInboundHandler<IByteBuffer>
     {
-        public static int i = 0;
-
         /// <summary>
         /// Read0是DotNetty特有的对于Read方法的封装
         /// 封装实现了：
@@ -25,19 +23,14 @@ namespace EchoClient
         {
             if (msg != null)
             {
-                i++;
-                Console.WriteLine($"Receive From Server {i}:" + msg.ToString(Encoding.UTF8));
+                Console.WriteLine($"Receive From Server:" + msg.ToString(Encoding.UTF8));
             }
-            ctx.WriteAsync(Unpooled.CopiedBuffer(msg));
         }
+
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
-            Console.WriteLine($"发送客户端消息");
-            for (int i = 0; i < 100; i++)
-            {
-                context.WriteAndFlushAsync(Unpooled.CopiedBuffer(Encoding.UTF8.GetBytes($"客户端消息:{i}!")));
-            }
+
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
