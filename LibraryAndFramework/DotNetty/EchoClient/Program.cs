@@ -1,14 +1,19 @@
-﻿using DotNetty.Transport.Bootstrapping;
+﻿using DotNetty.Buffers;
+using DotNetty.Common.Internal.Logging;
+using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using EchoClient;
 using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 //https://zhuanlan.zhihu.com/p/181239748
 //https://blog.csdn.net/nxy_wuhao/category_9469658.html
 class Program
 {
-    static async Task RunClientAsync()
+
+    private static async Task NewMethod()
     {
         var group = new MultithreadEventLoopGroup();
         try
@@ -23,8 +28,7 @@ class Program
                     pipeline.AddLast(new EchoClientHandler());
                 }));
             IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080));
-            Console.ReadLine();
-            await clientChannel.CloseAsync();
+
         }
         catch (Exception ex)
         {
@@ -32,10 +36,20 @@ class Program
         }
         finally
         {
-            await group.ShutdownGracefullyAsync();
+            //await group.ShutdownGracefullyAsync();
         }
     }
 
-    static void Main(string[] args) => RunClientAsync().Wait();
-    
+    static void Main(string[] args)
+    {
+
+        for (int i = 0; i < 1000; i++)
+        {
+            Console.WriteLine($"第{i + 1}次连接");
+            //_ = NewMethod();
+            //NewMethod().ConfigureAwait(false).GetAwaiter().GetResult(); //await
+            NewMethod().ConfigureAwait(false);
+        }
+    }
+
 }
