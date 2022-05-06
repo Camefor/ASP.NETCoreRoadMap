@@ -5,6 +5,48 @@ using System.Linq;
 namespace LearnAlgorithm.microsoft {
     public class General {
 
+        /// <summary>
+        /// 有效的字母异位词
+        /// 输入: s = "anagram", t = "nagaram"
+        ///  输出: true
+        /// </summary>
+        public static bool Question_242(string s, string t)
+        {
+            Dictionary<char, int> map = new Dictionary<char, int>();
+            for (int i = 65; i < 91; i++)
+            {
+                map.Add(char.Parse(((char)i).ToString().ToLower()), 0);
+            }
+            var sarr = s.ToCharArray();
+            var tarr = t.ToCharArray();
+
+            for (int i = 0; i < sarr.Length; i++)
+            {
+                if (map.ContainsKey(sarr[i]))
+                {
+                    map[sarr[i]] += 1;
+                }
+            }
+            for (int i = 0; i < tarr.Length; i++)
+            {
+                if (map.ContainsKey(tarr[i]))
+                {
+                    map[tarr[i]] -= 1;
+                }
+            }
+            var result = false;
+            foreach (var item in map.Values)
+            {
+                result = item == 0;
+                if (!result)
+                {
+                    break;
+                }
+            }
+            return result;
+        }
+
+
         public int[] Bubble (int[] arr) {
             int length = arr.Length;
             int temp = 0;
