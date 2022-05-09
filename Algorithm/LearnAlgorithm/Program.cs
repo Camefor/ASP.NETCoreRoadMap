@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using LearnAlgorithm.LeetCodeCommon;
+using LearnAlgorithm.LeetCodeCommon.Sort;
+
 namespace LearnAlgorithm
 {
     class Program
@@ -8,15 +10,14 @@ namespace LearnAlgorithm
 
         static void Main(string[] args)
         {
-            Core general = new Core();
             int[] nums = { 1, 7, 3, 6, 5, 9 };
-            int target = 9;
-            Console.WriteLine(string.Join(" , ", nums));
-            Console.WriteLine(target);
-            var result = general.SearchInsert2(nums, target);
-            Console.WriteLine(result);
-            var result2 = SearchInsert(nums, target);
-            Console.WriteLine(result2);
+            var leetCodeSort = new LeetCodeSort();
+            var result = leetCodeSort.BubbleSort(nums);
+            foreach (var item in result)
+            {
+                Console.Write(item + ",");
+            }
+
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
 
