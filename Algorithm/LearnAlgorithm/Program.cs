@@ -10,14 +10,23 @@ namespace LearnAlgorithm
 
         static void Main(string[] args)
         {
-            int[] nums = { 1, 7, 3, 6, 5, 9 };
-            var leetCodeSort = new LeetCodeSort();
-            var result = leetCodeSort.BubbleSort(nums);
-            foreach (var item in result)
-            {
-                Console.Write(item + ",");
-            }
+            int[] nums = { 1, 7, 3, 6, 5, 9, 21, 2, 23, 11, 32, 45, 25 };
 
+            var leetCodeSort = new LeetCodeSort();
+            var result_UserMergeSort = leetCodeSort.MergeSort(nums);
+
+
+            //var result_UseBubbleSort = leetCodeSort.BubbleSort(nums);
+            //var result_UserInsertSort = leetCodeSort.InsertSort(nums);
+
+            //foreach (var item in result_UseBubbleSort) Console.Write(item + ",");
+            //Console.WriteLine();
+            //foreach (var item in result_UserInsertSort) Console.Write(item + ",");
+            //Console.WriteLine();
+
+
+            foreach (var item in result_UserMergeSort) Console.Write(item + ",");
+            Console.WriteLine();
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
 
