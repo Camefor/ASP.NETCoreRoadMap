@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 
 //https://www.youtube.com/watch?v=UOa3dQT3hOc&list=PLFOgdf0iZ6uskTJam3P2BZwpdAGGG0e24&index=4
-namespace LearnAlgorithm.LeetCodeCommon.Sort
+namespace LearnAlgorithm.LeetCodeCommon
 {
 
 
     /// <summary>
     /// 排序算法:
     /// </summary>
-    public class LeetCodeSort
+    public class Lesson03
     {
 
         /// <summary>
@@ -88,7 +88,6 @@ namespace LearnAlgorithm.LeetCodeCommon.Sort
             int mid = lo + (hi - lo) / 2; //分两半
             MergeSortHandler(A, lo, mid, ref result);
             MergeSortHandler(A, mid + 1, hi, ref result);
-
             result = merage(A, lo, mid, hi);
         }
 
@@ -120,6 +119,9 @@ namespace LearnAlgorithm.LeetCodeCommon.Sort
 
             return nums;
         }
+
+        //快速排序算法：、、、
+        //拓扑排序算法：、、、
 
     }
 }
