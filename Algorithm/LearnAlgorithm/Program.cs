@@ -12,7 +12,7 @@ namespace LearnAlgorithm
         {
             int[] nums = { 1, 7, 3, 6, 5, 9, 21, 2, 23, 11, 32, 45, 25 };
 
-            var leetCodeSort = new LeetCodeSort();
+            var leetCodeSort = new Lesson03();
             var result_UserMergeSort = leetCodeSort.MergeSort(nums);
 
 
