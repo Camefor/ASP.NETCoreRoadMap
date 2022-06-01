@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using LearnAlgorithm.LeetCodeCommon;
-using LearnAlgorithm.LeetCodeCommon.Sort;
 
 namespace LearnAlgorithm
 {
