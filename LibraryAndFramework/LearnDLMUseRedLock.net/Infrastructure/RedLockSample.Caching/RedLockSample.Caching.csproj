@@ -13,4 +13,9 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\RedLockSample.Contract\RedLockSample.Contract.csproj" />
+  </ItemGroup>
+
+
 </Project>
