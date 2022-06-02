@@ -1,3 +1,7 @@
+//Learn DLM 
+//https://towardsdev.com/distributed-locks-manager-c-and-redis-fd3d86cd1250
+//https://github.com/MajeQafouri/RedisDistributedLockManager
+    
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -11,4 +11,11 @@
     <PackageReference Include="StackExchange.Redis" Version="2.2.79" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\RedLockSample.Common\RedLockSample.Common.csproj" />
+    <ProjectReference Include="..\..\Core\RedLockSample.Contract\RedLockSample.Contract.csproj" />
+    <ProjectReference Include="..\..\Core\RedLockSample.Service\RedLockSample.Service.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\RedLockSample.Caching\RedLockSample.Caching.csproj" />
+  </ItemGroup>
+
 </Project>
