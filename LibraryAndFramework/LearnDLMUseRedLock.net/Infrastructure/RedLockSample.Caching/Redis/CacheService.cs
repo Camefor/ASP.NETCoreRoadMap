@@ -22,9 +22,9 @@ namespace RedLockSample.Caching.Redis
         private readonly RedisConfiguration options;
 
         public CacheService(
-           IDatabase database,
-           IDistributedLockFactory distributedLockFactory,
-           IOptions<RedisConfiguration> options)
+            IDatabase database,
+            IDistributedLockFactory distributedLockFactory,
+            IOptions<RedisConfiguration> options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(RedisConfiguration));
@@ -34,41 +34,12 @@ namespace RedLockSample.Caching.Redis
             this.options = options.Value;
         }
 
-        /// <summary>
-        /// DoActionWithLockAsync 方法，可用于控制处理器功能的并发性。
-        /// </summary>
-        /// <param name="lockKey"></param>
-        /// <param name="processor"></param>
-        /// <returns></returns>
-        public async Task<LockProcessResult> DoActionWithLockAsync(string lockKey, Func<Task> processor)
-        {
-            var processResult = new LockProcessResult();
-            try
-            {
-                await using var redLock = await distributedLockFactory.CreateLockAsync
-                    (lockKey, TimeSpan.FromSeconds(options.ExpiryTimeFromSeconds),
-                    TimeSpan.FromSeconds(options.WaitTimeFromSeconds),
-                    TimeSpan.FromMilliseconds(options.RetryTimeFromMilliseconds)
-                    );
-                if (redLock.IsAcquired) await processor();
-                else processResult.SetException(new Exception("The lock wasn't acquired"));
-            }
-            catch (Exception ex)
-            {
-                processResult.SetException(ex);
-            }
-            
-            return processResult;
-        }
 
-        public Task<LockProcessResult<TInput>> DoActionWithLockAsync<TInput>(string lockKey, TInput parameter, Func<TInput, Task> processor)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<TEntity> GetAsync<TEntity>(string key)
         {
             var entity = await redisCache.StringGetAsync(key);
+
             if (entity.HasValue)
             {
                 return Deserialize<TEntity>(entity);
@@ -87,6 +58,66 @@ namespace RedLockSample.Caching.Redis
         }
 
 
+        public async Task<LockProcessResult> DoActionWithLockAsync(
+         string lockKey,
+         Func<Task> processor)
+        {
+            var processResult = new LockProcessResult();
+            try
+            {
+                await using var redLock = await distributedLockFactory.CreateLockAsync
+                      (lockKey, TimeSpan.FromSeconds(options.ExpiryTimeFromSeconds),
+                      TimeSpan.FromSeconds(options.WaitTimeFromSeconds),
+                      TimeSpan.FromMilliseconds(options.RetryTimeFromMilliseconds));
+
+                if (redLock.IsAcquired)
+                {
+                    await processor();
+                }
+                else
+                {
+                    processResult.SetException(new Exception("The lock wasn't acquired"));
+                }
+            }
+            catch (Exception ex)
+            {
+                processResult.SetException(ex);
+            }
+
+            return processResult;
+        }
+
+
+        public async Task<LockProcessResult<TInput>> DoActionWithLockAsync<TInput>(
+           string lockKey,
+           TInput parameter,
+           Func<TInput, Task> processor)
+        {
+            var processResult = new LockProcessResult<TInput>();
+            try
+            {
+                await using var redLock = await distributedLockFactory.CreateLockAsync
+                      (lockKey, TimeSpan.FromSeconds(options.ExpiryTimeFromSeconds),
+                      TimeSpan.FromSeconds(options.WaitTimeFromSeconds),
+                      TimeSpan.FromMilliseconds(options.RetryTimeFromMilliseconds));
+
+                if (redLock.IsAcquired)
+                {
+                    await processor(parameter);
+                }
+                else
+                {
+                    processResult.SetException(new Exception("The Lock was'nt aquired"));
+                }
+            }
+            catch (Exception ex)
+            {
+                processResult.SetException(ex);
+            }
+
+            return processResult;
+        }
+
 
         public static string Serialize<T>(T obj) //where T : class
         {
@@ -97,6 +128,5 @@ namespace RedLockSample.Caching.Redis
         {
             return JsonConvert.DeserializeObject<T>(obj);
         }
-
     }
 }

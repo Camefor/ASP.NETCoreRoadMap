@@ -10,7 +10,6 @@ namespace RedLockSample.Contract
     {
         Task AddContributionWithoutDLM(int value);
 
-
         Task AddContributionWithDLM(int value);
     }
 }

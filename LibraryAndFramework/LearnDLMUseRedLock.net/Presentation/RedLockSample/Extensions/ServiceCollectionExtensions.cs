@@ -13,7 +13,9 @@ namespace RedLockSample.Extensions
     {
         public static void ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<RedisConfiguration>(configuration.GetSection("Redis"));
+            //services.Configure<RedisConfiguration>(configuration.GetSection("Redis"));
+            services.Configure<RedisConfiguration>(opt =>
+              configuration.GetSection(nameof(RedisConfiguration)).Bind(opt));
         }
 
         /// <summary>

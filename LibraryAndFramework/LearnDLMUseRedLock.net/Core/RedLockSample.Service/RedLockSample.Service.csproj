@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RedLockSample.Common\RedLockSample.Common.csproj" />
+    <ProjectReference Include="..\RedLockSample.Contract\RedLockSample.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

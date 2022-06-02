@@ -14,7 +14,8 @@ namespace RedLockSample.Contract
             this.Exception = ex;
         }
 
-        public bool IsSucessfullProcessd => Exception == null;
+        public bool IsSuccessfullyProcessed => Exception == null;
+        
         public Exception Exception { get; set; }
     }
 
