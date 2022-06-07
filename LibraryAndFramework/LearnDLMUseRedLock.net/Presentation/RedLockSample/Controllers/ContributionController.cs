@@ -28,35 +28,27 @@ namespace RedLockSample.Controllers
         public async Task<int> AddContributionWithDLM()
         {
             List<Task> addContributionTasks = new List<Task>();
-
-
             for (int i = 1; i <= 50; i++)
             {
                 addContributionTasks.Add(_contributionService.AddContributionWithDLM(1));
             }
             await Task.WhenAll(addContributionTasks);
-
             return await _cacheService.GetAsync<int>(CacheKeyProvider.GetAddContributionKey);
-
         }
 
         /// <summary>
-        /// 不使用分布式锁 效果  50个并发请求瞎 每次读取的值不固定，
+        /// 不使用分布式锁 效果  50个并发请求 每次读取的值不固定，
         /// </summary>
         /// <returns></returns>
         [HttpGet("Without_DLM")]
         public async Task<int> AddContributionsWithoutDLM()
         {
             List<Task> addContributionTasks = new List<Task>();
-
-            
             for (int i = 1; i <= 50; i++)
             {
                 addContributionTasks.Add(_contributionService.AddContributionWithoutDLM(1));
             }
             await Task.WhenAll(addContributionTasks);
-
-
             return await _cacheService.GetAsync<int>(CacheKeyProvider.GetAddContributionKey);
         }
     }
