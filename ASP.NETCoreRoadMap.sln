@@ -63,15 +63,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3D0898BC-FC3F-40BF-9402-DFA3D6932896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLockSample.Caching", "LibraryAndFramework\LearnDLMUseRedLock.net\Infrastructure\RedLockSample.Caching\RedLockSample.Caching.csproj", "{FDD48EF9-E1C6-43A5-B61D-656AECC1EBEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample.Caching", "LibraryAndFramework\LearnDLMUseRedLock.net\Infrastructure\RedLockSample.Caching\RedLockSample.Caching.csproj", "{FDD48EF9-E1C6-43A5-B61D-656AECC1EBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLockSample.Common", "LibraryAndFramework\LearnDLMUseRedLock.net\Core\RedLockSample.Common\RedLockSample.Common.csproj", "{421ECBA3-A25F-4502-938E-96751ECE7CB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample.Common", "LibraryAndFramework\LearnDLMUseRedLock.net\Core\RedLockSample.Common\RedLockSample.Common.csproj", "{421ECBA3-A25F-4502-938E-96751ECE7CB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLockSample.Contract", "LibraryAndFramework\LearnDLMUseRedLock.net\Core\RedLockSample.Contract\RedLockSample.Contract.csproj", "{9CC77D28-F295-44EF-87B1-50CBD6369E92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample.Contract", "LibraryAndFramework\LearnDLMUseRedLock.net\Core\RedLockSample.Contract\RedLockSample.Contract.csproj", "{9CC77D28-F295-44EF-87B1-50CBD6369E92}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample.Service", "LibraryAndFramework\LearnDLMUseRedLock.net\Core\RedLockSample.Service\RedLockSample.Service.csproj", "{2AB0B8E5-74F5-4F3F-BF69-1C757E301A7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLockSample", "LibraryAndFramework\LearnDLMUseRedLock.net\Presentation\RedLockSample\RedLockSample.csproj", "{29F2DE93-230E-42A0-97A2-23F4D1202866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample", "LibraryAndFramework\LearnDLMUseRedLock.net\Presentation\RedLockSample\RedLockSample.csproj", "{29F2DE93-230E-42A0-97A2-23F4D1202866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreRateLimit.Demo", "LibraryAndFramework\ThirdpartyLib\AspNetCoreRateLimit.Demo\AspNetCoreRateLimit.Demo.csproj", "{EA85D201-2949-49E2-8352-DA7426BF65FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,10 @@ Global
 		{29F2DE93-230E-42A0-97A2-23F4D1202866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29F2DE93-230E-42A0-97A2-23F4D1202866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29F2DE93-230E-42A0-97A2-23F4D1202866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +194,7 @@ Global
 		{9CC77D28-F295-44EF-87B1-50CBD6369E92} = {399EF0BC-DC5B-456A-83C6-D4D83E9F9E9B}
 		{2AB0B8E5-74F5-4F3F-BF69-1C757E301A7B} = {399EF0BC-DC5B-456A-83C6-D4D83E9F9E9B}
 		{29F2DE93-230E-42A0-97A2-23F4D1202866} = {3D0898BC-FC3F-40BF-9402-DFA3D6932896}
+		{EA85D201-2949-49E2-8352-DA7426BF65FA} = {9666F880-CD9D-4B02-8B95-D870FB483000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
