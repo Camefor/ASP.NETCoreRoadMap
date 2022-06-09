@@ -73,7 +73,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample.Service", "Li
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedLockSample", "LibraryAndFramework\LearnDLMUseRedLock.net\Presentation\RedLockSample\RedLockSample.csproj", "{29F2DE93-230E-42A0-97A2-23F4D1202866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreRateLimit.Demo", "LibraryAndFramework\ThirdpartyLib\AspNetCoreRateLimit.Demo\AspNetCoreRateLimit.Demo.csproj", "{EA85D201-2949-49E2-8352-DA7426BF65FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreRateLimit.Demo", "LibraryAndFramework\ThirdpartyLib\AspNetCoreRateLimit.Demo\AspNetCoreRateLimit.Demo.csproj", "{EA85D201-2949-49E2-8352-DA7426BF65FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishersAndSubscribers", "PublishersAndSubscribers", "{AB44E229-B15E-4CB6-B906-840924B4411C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublishersAndSubscribersDemo", "DesignPatterns\PublishersAndSubscribers\PublishersAndSubscribersDemo\PublishersAndSubscribersDemo.csproj", "{37318AD3-C3F4-4353-88D3-17B4AF349924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +165,10 @@ Global
 		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA85D201-2949-49E2-8352-DA7426BF65FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37318AD3-C3F4-4353-88D3-17B4AF349924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37318AD3-C3F4-4353-88D3-17B4AF349924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37318AD3-C3F4-4353-88D3-17B4AF349924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37318AD3-C3F4-4353-88D3-17B4AF349924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +203,8 @@ Global
 		{2AB0B8E5-74F5-4F3F-BF69-1C757E301A7B} = {399EF0BC-DC5B-456A-83C6-D4D83E9F9E9B}
 		{29F2DE93-230E-42A0-97A2-23F4D1202866} = {3D0898BC-FC3F-40BF-9402-DFA3D6932896}
 		{EA85D201-2949-49E2-8352-DA7426BF65FA} = {9666F880-CD9D-4B02-8B95-D870FB483000}
+		{AB44E229-B15E-4CB6-B906-840924B4411C} = {A1F746B4-C3B9-4FF7-99A7-D997562CFE76}
+		{37318AD3-C3F4-4353-88D3-17B4AF349924} = {AB44E229-B15E-4CB6-B906-840924B4411C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
