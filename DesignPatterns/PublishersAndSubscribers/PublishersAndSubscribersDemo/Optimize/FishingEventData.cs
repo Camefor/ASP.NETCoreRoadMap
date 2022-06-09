@@ -14,7 +14,7 @@ namespace PublishersAndSubscribersDemo.Optimize
     {
         public FishTypeEnum FishType { get; set; }
 
-        public FishingMan FisingMan { get; set; }
+        public FishingMan FishingMan { get; set; }
         
     }
 }
