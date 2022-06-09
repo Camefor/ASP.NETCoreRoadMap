@@ -9,7 +9,7 @@ var man = new FishingMan("钓鱼人");
 
 man.FishingRod = fishingRod;
 
-fishingRod.FishingEvent += man.Update;
+fishingRod.FishingEvent += man.HandleEvent;
 
 while (man.FishCount < 5)
 {
