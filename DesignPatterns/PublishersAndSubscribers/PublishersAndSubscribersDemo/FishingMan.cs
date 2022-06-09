@@ -10,7 +10,7 @@ namespace PublishersAndSubscribersDemo
     /// <summary>
     /// 垂钓者 （观察者）
     /// </summary>
-    public class FishingMan
+    public class FishingMan : IEventHandler<IEventData>
     {
 
         /// <summary>
@@ -34,11 +34,23 @@ namespace PublishersAndSubscribersDemo
             FishingRod.ThrowHook(this);
         }
 
-        public void Update(FishingEventData eventData)
+        public void HandleEvent(IEventData eventData)
         {
-            FishCount++;
-            Console.WriteLine("{0}：钓到一条[{2}]，已经钓到{1}条鱼了！", Name, FishCount, eventData.FishType);
+
+            if (eventData is FishingEventData)
+            {
+                FishCount++;
+                Console.WriteLine("{0}：钓到一条[{2}]，已经钓到{1}条鱼了！", Name, FishCount, ((FishingEventData)eventData).FishType);
+            }
+            else
+            {
+                //其他事件处理
+            }
         }
+
+        
+
+
 
     }
 }
