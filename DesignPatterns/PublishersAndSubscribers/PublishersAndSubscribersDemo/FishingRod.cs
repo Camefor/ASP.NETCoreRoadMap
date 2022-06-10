@@ -1,4 +1,5 @@
 ﻿using PublishersAndSubscribersDemo.Optimize;
+using PublishersAndSubscribersDemo.Optimize2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,27 +23,31 @@ namespace PublishersAndSubscribersDemo
 
             try
             {
+                //统一注册事件
                 Assembly assembly = Assembly.GetExecutingAssembly();
-
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (typeof(IEventHandler<>).IsAssignableFrom(type))//判断当前类型是否实现了IEventHandler接口
+                    if (typeof(IEventHandler).IsAssignableFrom(type))//判断当前类型是否实现了IEventHandler接口
                     {
-                        Type handlerInterface = type.GetInterface("IEventHandler`1");//获取该类实现的泛型接口
-                        if (handlerInterface==null)
+                        if (type.Name == typeof(FishingEventHandler).Name)
                         {
-                            break;
-                        }
-                        Type eventDataType = handlerInterface.GetGenericArguments()[0]; // 获取泛型接口指定的参数类型
+                            Type handlerInterface = type.GetInterface(type.Name);//获取该类实现的泛型接口
+                            if (handlerInterface == null)
+                            {
+                                handlerInterface = typeof(IEventHandler<FishingEventData>);
+                            }
+                            Type eventDataType = handlerInterface.GetGenericArguments()[0]; // 获取泛型接口指定的参数类型
 
-                        //如果参数类型是FishingEventData，则说明事件源匹配
-                        if (eventDataType.Equals(typeof(FishingEventData)))
-                        {
-                            //创建实例
-                            var handler = Activator.CreateInstance(type) as IEventHandler<FishingEventData>;
-                            //注册事件
-                            FishingEvent += handler.HandleEvent;
+                            //如果参数类型是FishingEventData，则说明事件源匹配
+                            if (eventDataType.Equals(typeof(FishingEventData)))
+                            {
+                                //创建实例
+                                var handler = Activator.CreateInstance(type) as IEventHandler<FishingEventData>;
+                                //注册事件
+                                FishingEvent += handler.HandleEvent;
+                            }
                         }
+
                     }
                 }
 
