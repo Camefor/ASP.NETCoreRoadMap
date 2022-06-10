@@ -1,5 +1,6 @@
 ﻿using PublishersAndSubscribersDemo.Optimize;
 using PublishersAndSubscribersDemo.Optimize2;
+using PublishersAndSubscribersDemo.Optimize3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,12 +72,23 @@ namespace PublishersAndSubscribersDemo
                 var type = (FishTypeEnum)new Random().Next(0, 5);
                 Console.WriteLine("铃铛：叮叮叮，鱼儿咬钩了");
                 if (FishingEvent != null)
-                    FishingEvent(new FishingEventData
+                {
+                    //手动触发事件
+                    //FishingEvent(new FishingEventData
+                    //{
+                    //    FishType = type,
+                    //    FishingMan = man,
+                    //    EventSource = this
+                    //});
+
+                    FishingEventData? eventData = new FishingEventData()
                     {
                         FishType = type,
-                        FishingMan = man,
-                        EventSource = this
-                    });
+                        FishingMan = man
+                    };
+                    EventBus.Default.Trigger<FishingEventData>(eventData);
+
+                }
             }
         }
     }
