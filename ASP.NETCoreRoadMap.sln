@@ -77,7 +77,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreRateLimit.Demo", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishersAndSubscribers", "PublishersAndSubscribers", "{AB44E229-B15E-4CB6-B906-840924B4411C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublishersAndSubscribersDemo", "DesignPatterns\PublishersAndSubscribers\PublishersAndSubscribersDemo\PublishersAndSubscribersDemo.csproj", "{37318AD3-C3F4-4353-88D3-17B4AF349924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublishersAndSubscribersDemo", "DesignPatterns\PublishersAndSubscribers\PublishersAndSubscribersDemo\PublishersAndSubscribersDemo.csproj", "{37318AD3-C3F4-4353-88D3-17B4AF349924}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "A_Principle", "A_Principle", "{54402D61-369F-4E0A-AEFC-E3E71562B435}"
+	ProjectSection(SolutionItems) = preProject
+		articles.txt = articles.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -205,6 +210,7 @@ Global
 		{EA85D201-2949-49E2-8352-DA7426BF65FA} = {9666F880-CD9D-4B02-8B95-D870FB483000}
 		{AB44E229-B15E-4CB6-B906-840924B4411C} = {A1F746B4-C3B9-4FF7-99A7-D997562CFE76}
 		{37318AD3-C3F4-4353-88D3-17B4AF349924} = {AB44E229-B15E-4CB6-B906-840924B4411C}
+		{54402D61-369F-4E0A-AEFC-E3E71562B435} = {A1F746B4-C3B9-4FF7-99A7-D997562CFE76}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
