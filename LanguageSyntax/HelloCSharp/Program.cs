@@ -28,6 +28,8 @@
             {
                 if (new Random().Next(1, 2) != 2)
                 {
+                    res_msg = "模拟异常 即将抛出异常";
+
                     throw new Exception("模拟异常");
                 }
                 res_msg = "我是返回的数据";
