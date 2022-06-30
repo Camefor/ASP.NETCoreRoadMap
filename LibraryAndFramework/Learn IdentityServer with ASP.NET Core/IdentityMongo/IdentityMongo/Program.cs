@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IdentityMongo.Models;
 
+//ASP.NET Core 上的 Identity 简介: https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity?view=aspnetcore-6.0&tabs=visual-studio
 //https://www.yogihosting.com/aspnet-core-identity-mongodb/
 namespace IdentityMongo
 {
