@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Authentication
+
+<h2>Claims</h2>
+<dl>
+    @foreach (var claims in User.Claims)
+    {
+        <dt>@claims.Type</dt>
+        <dd>@claims.Value</dd>
+    }
+</dl>
