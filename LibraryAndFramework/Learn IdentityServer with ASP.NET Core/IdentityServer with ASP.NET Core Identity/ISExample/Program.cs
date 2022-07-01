@@ -13,7 +13,9 @@ using ISExample.Models;
 
 namespace ISExample
 {
-    //https://www.yogihosting.com/identityserver-aspnet-core-identity-mongodb-database/#apiscopes
+    //https://www.yogihosting.com/identityserver-aspnet-core-identity-mongodb-database
+
+    //在项目 \LibraryAndFramework\Learn IdentityServer with ASP.NET Core\IdentityMongo\IdentityMongo\IdentityMongo.csproj 基础上 增加Id4功能。
     public class Program
     {
         public static void Main(string[] args)
