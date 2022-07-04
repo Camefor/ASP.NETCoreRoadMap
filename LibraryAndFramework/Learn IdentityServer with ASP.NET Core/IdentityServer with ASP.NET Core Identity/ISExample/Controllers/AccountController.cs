@@ -27,7 +27,7 @@ namespace ISExample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Required][EmailAddress] string email, [Required] string password, string returnurl)
+        public async Task<IActionResult> Login([Required][EmailAddress] string email, [Required] string password, string? returnurl)
         {
             if (ModelState.IsValid)
             {
