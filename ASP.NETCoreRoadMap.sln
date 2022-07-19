@@ -94,7 +94,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISExample", "LibraryAndFram
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityMongo", "LibraryAndFramework\Learn IdentityServer with ASP.NET Core\IdentityMongo\IdentityMongo\IdentityMongo.csproj", "{4C5A779F-E497-47BD-A856-68C915F19D80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISClient", "LibraryAndFramework\Learn IdentityServer with ASP.NET Core\IdentityServer with ASP.NET Core Identity\ISClient\ISClient.csproj", "{574021A8-4D2E-4E3B-AFFA-755422E7DB02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISClient", "LibraryAndFramework\Learn IdentityServer with ASP.NET Core\IdentityServer with ASP.NET Core Identity\ISClient\ISClient.csproj", "{574021A8-4D2E-4E3B-AFFA-755422E7DB02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsynAndParallel", "AsynAndParallel", "{CED3A93C-F631-4833-A520-950858FDC272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpAsync", "LanguageSyntax\AsynAndParallel\CSharpAsync\CSharpAsync.csproj", "{382F2DB7-258C-4ECC-9FE3-CCB0342E9629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -198,6 +202,10 @@ Global
 		{574021A8-4D2E-4E3B-AFFA-755422E7DB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574021A8-4D2E-4E3B-AFFA-755422E7DB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574021A8-4D2E-4E3B-AFFA-755422E7DB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{382F2DB7-258C-4ECC-9FE3-CCB0342E9629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{382F2DB7-258C-4ECC-9FE3-CCB0342E9629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{382F2DB7-258C-4ECC-9FE3-CCB0342E9629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{382F2DB7-258C-4ECC-9FE3-CCB0342E9629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,6 +249,8 @@ Global
 		{36A2854C-EE09-4070-A735-C4513309B1F7} = {3EC270BB-188A-4E22-8994-BB16A4B883C3}
 		{4C5A779F-E497-47BD-A856-68C915F19D80} = {069D2AEC-162F-4DE0-BDCB-2DA5716A26C4}
 		{574021A8-4D2E-4E3B-AFFA-755422E7DB02} = {3EC270BB-188A-4E22-8994-BB16A4B883C3}
+		{CED3A93C-F631-4833-A520-950858FDC272} = {8672CC71-F34E-4BCA-85BF-EC2EFEBA8E39}
+		{382F2DB7-258C-4ECC-9FE3-CCB0342E9629} = {CED3A93C-F631-4833-A520-950858FDC272}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
