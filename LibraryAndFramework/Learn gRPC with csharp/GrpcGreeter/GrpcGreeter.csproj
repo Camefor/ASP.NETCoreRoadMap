@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <!--  
+      默认情况下，<Protobuf> 引用将生成具体的客户端和服务基类。 
+      可使用引用元素的 GrpcServices 特性来限制 C# 资产生成。 有效 GrpcServices 选项如下：
+      Both（如果不存在，则为默认值）
+      Server
+      Client
+      None
+     -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+  </ItemGroup>
+
+  <!--
+   根据定义的 proto文件 使用工具包   Grpc.Tools 生成C# 代码  ，包含在 obj 目录中 ，为实现grpc的核心。
+   服务器和客户端项目都需要此包。 Grpc.AspNetCore 元包中包含对 Grpc.Tools 的引用
+  -->
+</Project>

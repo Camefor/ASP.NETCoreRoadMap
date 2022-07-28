@@ -1,0 +1,24 @@
+// gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服务和消息：
+// 可自动生成用于服务、客户端和消息的 .NET 类型
+
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeterClient";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}

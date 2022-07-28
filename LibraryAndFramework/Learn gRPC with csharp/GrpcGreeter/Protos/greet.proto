@@ -1,0 +1,31 @@
+// gRPC 使用协定优先方法进行 API 开发。 默认情况下，协议缓冲区 (protobuf) 用作接口定义语言 (IDL)。 .proto 文件包含：
+// gRPC 服务的定义。
+// 在客户端与服务器之间发送的消息。
+
+
+ // gRPC 支持的 10 种默认语言中的每一种都有多个层，允许您自定义应用程序中所需的部分。
+// gRPC 中有三个主要堆栈：C-core、Go 和 Java。大多数语言都是基于 C 的 gRPC 核心库之上的瘦包装器：
+// C# 语言
+// https://grpc.io/img/grpc-core-stack.svg
+
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeter";
+
+package greet;
+
+// The greeting service definition.
+service Greeter { //定义 Greeter 服务
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply); //Greeter 服务定义 SayHello 调用。
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
