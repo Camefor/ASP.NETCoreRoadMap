@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\example.proto" />
     <None Remove="Protos\greet.proto" />
   </ItemGroup>
 
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\example.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
   </ItemGroup>
 

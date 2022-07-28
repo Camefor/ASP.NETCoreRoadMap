@@ -4,7 +4,7 @@
 
 
  // gRPC 支持的 10 种默认语言中的每一种都有多个层，允许您自定义应用程序中所需的部分。
-// gRPC 中有三个主要堆栈：C-core、Go 和 Java。大多数语言都是基于 C 的 gRPC 核心库之上的瘦包装器：
+// gRPC 中有三个主要堆栈：C-core、Go 和 Java。大多数语言都是基于 C 的 gRPC 核心库：
 // C# 语言
 // https://grpc.io/img/grpc-core-stack.svg
 
@@ -20,6 +20,7 @@ service Greeter { //定义 Greeter 服务
   rpc SayHello (HelloRequest) returns (HelloReply); //Greeter 服务定义 SayHello 调用。
 }
 
+
 // The request message containing the user's name.
 message HelloRequest {
   string name = 1;
@@ -29,3 +30,5 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
 }
+
+
