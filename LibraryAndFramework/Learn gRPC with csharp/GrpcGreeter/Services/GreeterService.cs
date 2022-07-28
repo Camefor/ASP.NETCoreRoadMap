@@ -1,5 +1,4 @@
 using Grpc.Core;
-using GrpcGreeter;
 
 namespace GrpcGreeter.Services
 {
@@ -18,6 +17,8 @@ namespace GrpcGreeter.Services
                 Message = "Hello " + request.Name
             });
         }
+
+
 
 
     }

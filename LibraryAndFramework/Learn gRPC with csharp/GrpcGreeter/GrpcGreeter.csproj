@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\Example.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\example.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
     <!--  
       默认情况下，<Protobuf> 引用将生成具体的客户端和服务基类。 
@@ -25,5 +30,9 @@
   <!--
    根据定义的 proto文件 使用工具包   Grpc.Tools 生成C# 代码  ，包含在 obj 目录中 ，为实现grpc的核心。
    服务器和客户端项目都需要此包。 Grpc.AspNetCore 元包中包含对 Grpc.Tools 的引用
+
+
+默认情况下，会为 <Protobuf> 项组中包含的每个 .proto 文件都生成服务器和客户端资产。
+若要确保服务器项目中仅生成服务器资产，请将 GrpcServices 属性设置为 Server。
   -->
 </Project>
