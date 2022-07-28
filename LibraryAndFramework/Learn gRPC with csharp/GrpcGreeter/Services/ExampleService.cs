@@ -34,11 +34,24 @@ namespace GrpcGreeter.Services
         /// <returns></returns>
         public override async Task StreamingFromServer(ExampleRequest request, IServerStreamWriter<ExampleResponse> responseStream, ServerCallContext context)
         {
-            for (int i = 0; i < 5; i++)
+            // 某些流式处理方法设计为永久运行
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    await responseStream.WriteAsync(new ExampleResponse { Message = "hello world from UnaryCall； index: " + i });
+            //    await Task.Delay(TimeSpan.FromSeconds(1));
+            //}
+
+
+            //对于连续流式处理方法，客户端可以在不再需要调用时将其取消。 当发生取消时，客户端会将信号发送到服务器，并引发 ServerCallContext.CancellationToken。 应在服务器上通过异步方法使用 CancellationToken 标记
+            int i = 0;
+            while (!context.CancellationToken.IsCancellationRequested)
             {
+                _logger.LogInformation("enter");
+                i++;
                 await responseStream.WriteAsync(new ExampleResponse { Message = "hello world from UnaryCall； index: " + i });
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
+            _logger.LogInformation("exit");
         }
 
     }
