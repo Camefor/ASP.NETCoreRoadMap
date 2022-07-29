@@ -10,7 +10,7 @@
 
 syntax = "proto3";
 
-option csharp_namespace = "GrpcGreeter";
+option csharp_namespace = "GrpcGreeterClient";
 
 package example;
 
@@ -22,7 +22,7 @@ service Example{
 
 	//服务端流式 RPC	 传入一个请求对象，服务端可以返回多个结果对象
 	rpc StreamingFromServer(ExampleRequest)  returns (stream ExampleResponse);
-	rpc StreamingFromClient(stream ExampleRequest)  returns ( ExampleResponse);
+    rpc StreamingFromClient (stream ExampleRequest) returns (ExampleResponse);
 	rpc StreamingBothWays (stream ExampleRequest) returns (stream ExampleResponse);
 }
 

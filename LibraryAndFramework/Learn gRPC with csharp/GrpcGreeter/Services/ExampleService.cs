@@ -20,6 +20,8 @@ namespace GrpcGreeter.Services
         /// <returns></returns>
         public override Task<ExampleResponse> UnaryCall(ExampleRequest request, ServerCallContext context)
         {
+            var userAgent = context.RequestHeaders.GetValue("user-agent");
+            _logger.LogInformation("this client's ua is " + userAgent);
             return Task.FromResult(new ExampleResponse { Message = "hello world from UnaryCall" });
         }
 
@@ -37,7 +39,8 @@ namespace GrpcGreeter.Services
             // 某些流式处理方法设计为永久运行
             //for (int i = 0; i < 5; i++)
             //{
-            //    await responseStream.WriteAsync(new ExampleResponse { Message = "hello world from UnaryCall； index: " + i });
+            //模拟不断的有数据要发送给客户端
+            //    await responseStream.WriteAsync(new ExampleResponse { Message = " this response from  UnaryCall； index: " + i });
             //    await Task.Delay(TimeSpan.FromSeconds(1));
             //}
 
@@ -48,10 +51,41 @@ namespace GrpcGreeter.Services
             {
                 _logger.LogInformation("enter");
                 i++;
-                await responseStream.WriteAsync(new ExampleResponse { Message = "hello world from UnaryCall； index: " + i });
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                await responseStream.WriteAsync(new ExampleResponse { Message = "this response from   StreamingFromServer； index: " + i });
+                await Task.Delay(TimeSpan.FromSeconds(1), context.CancellationToken);
             }
-            _logger.LogInformation("exit");
+            _logger.LogInformation("exit response");
+        }
+
+        //public override async Task<ExampleResponse> StreamingFromClient(IAsyncStreamReader<ExampleRequest> requestStream, ServerCallContext context)
+        //{
+        //    while (await requestStream.MoveNext())
+        //    {
+        //        var message = requestStream.Current;
+        //        _logger.LogInformation($"receive a message from client use StreamingFromClient : {message}");
+        //    }
+        //    return new ExampleResponse { Message = "hello world   StreamingFromClient； " };
+        //}
+
+        public override async Task<ExampleResponse> StreamingFromClient(
+            IAsyncStreamReader<ExampleRequest> requestStream, ServerCallContext context)
+        {
+            await foreach (var message in requestStream.ReadAllAsync())
+            {
+                _logger.LogInformation($"receive a message from client use StreamingFromClient : {message}");
+                return new ExampleResponse { Message = "hello world   StreamingFromClient； " };
+            }
+            return new ExampleResponse { Message = "hello world   StreamingFromClient； " };
+        }
+
+        public override async Task StreamingBothWays(IAsyncStreamReader<ExampleRequest> requestStream, IServerStreamWriter<ExampleResponse> responseStream, ServerCallContext context)
+        {
+            var counter = 0;
+            await foreach (var message in requestStream.ReadAllAsync())
+            {
+                _logger.LogInformation($"receive a message from client use StreamingBothWays : {message}");
+                await responseStream.WriteAsync(new ExampleResponse { Message = $"this response from   StreamingBothWays :{counter} " });
+            }
         }
 
     }
