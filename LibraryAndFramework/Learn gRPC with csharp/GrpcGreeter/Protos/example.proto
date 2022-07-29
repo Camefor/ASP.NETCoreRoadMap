@@ -20,9 +20,15 @@ service Example{
 	// 简单 RPC（Unary RPC） 一般的rpc调用，传入一个请求对象，返回一个返回对象；一般的rpc调用，传入一个请求对象，返回一个返回对象
 	rpc UnaryCall(ExampleRequest) returns (ExampleResponse); 
 
-	//服务端流式 RPC	 传入一个请求对象，服务端可以返回多个结果对象
+	//服务端流式 RPC	 传入一个请求对象，服务端可以返回多个结果对象 ,
+	//典型的例子是客户端向服务端发送一个股票代码，服务端就把该股票的实时数据源源不断的返回给客户端
 	rpc StreamingFromServer(ExampleRequest)  returns (stream ExampleResponse);
-	rpc StreamingFromClient(stream ExampleRequest)  returns ( ExampleResponse);
+
+	// 客户端流式rpc 应用场景： 物联网终端向服务器报送数据。
+	  rpc StreamingFromClient (stream ExampleRequest) returns (ExampleResponse);
+
+	// 双向流式rpc 结合客户端流式rpc和服务端流式rpc，可以传入多个对象，返回多个响应对象
+	//proto语法 :应用场景：聊天应用。
 	rpc StreamingBothWays (stream ExampleRequest) returns (stream ExampleResponse);
 }
 
