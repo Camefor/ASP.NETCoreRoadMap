@@ -104,7 +104,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Learn gRPC with csharp", "L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreeter", "LibraryAndFramework\Learn gRPC with csharp\GrpcGreeter\GrpcGreeter.csproj", "{DE138ECC-9B0C-4D89-AA14-A2595690B080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreeterClient", "LibraryAndFramework\Learn gRPC with csharp\GrpcGreeterClient\GrpcGreeterClient.csproj", "{E9F03CA1-FC17-498B-804D-5DAB47AEB67D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreeterClient", "LibraryAndFramework\Learn gRPC with csharp\GrpcGreeterClient\GrpcGreeterClient.csproj", "{E9F03CA1-FC17-498B-804D-5DAB47AEB67D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedisPubSub", "RedisPubSub", "{245F1648-BB3A-4D55-9AAD-175BF4DAB9C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisPublisher", "LibraryAndFramework\RedisPubSub\RedisPublisher\RedisPublisher.csproj", "{F37CAE31-0356-4F92-8FC2-AB1CDA064271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisSubscriber", "LibraryAndFramework\RedisPubSub\RedisSubscriber\RedisSubscriber.csproj", "{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -220,6 +226,14 @@ Global
 		{E9F03CA1-FC17-498B-804D-5DAB47AEB67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9F03CA1-FC17-498B-804D-5DAB47AEB67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9F03CA1-FC17-498B-804D-5DAB47AEB67D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F37CAE31-0356-4F92-8FC2-AB1CDA064271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F37CAE31-0356-4F92-8FC2-AB1CDA064271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F37CAE31-0356-4F92-8FC2-AB1CDA064271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F37CAE31-0356-4F92-8FC2-AB1CDA064271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -268,6 +282,9 @@ Global
 		{603B2F68-F933-4214-ACB2-CD4036273862} = {2EEA1F0A-EC08-477B-9202-EE10BFA737E5}
 		{DE138ECC-9B0C-4D89-AA14-A2595690B080} = {603B2F68-F933-4214-ACB2-CD4036273862}
 		{E9F03CA1-FC17-498B-804D-5DAB47AEB67D} = {603B2F68-F933-4214-ACB2-CD4036273862}
+		{245F1648-BB3A-4D55-9AAD-175BF4DAB9C7} = {2EEA1F0A-EC08-477B-9202-EE10BFA737E5}
+		{F37CAE31-0356-4F92-8FC2-AB1CDA064271} = {245F1648-BB3A-4D55-9AAD-175BF4DAB9C7}
+		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6} = {245F1648-BB3A-4D55-9AAD-175BF4DAB9C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
