@@ -106,6 +106,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisPublisher", "LibraryAn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisSubscriber", "LibraryAndFramework\RedisPubSub\RedisSubscriber\RedisSubscriber.csproj", "{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollyDemo", "LibraryAndFramework\ThirdpartyLib\PollyDemo\PollyDemo.csproj", "{A2BA2378-F417-475A-9AB6-CA3B9C82441C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -220,6 +222,10 @@ Global
 		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BA2378-F417-475A-9AB6-CA3B9C82441C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BA2378-F417-475A-9AB6-CA3B9C82441C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BA2378-F417-475A-9AB6-CA3B9C82441C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BA2378-F417-475A-9AB6-CA3B9C82441C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -269,6 +275,7 @@ Global
 		{245F1648-BB3A-4D55-9AAD-175BF4DAB9C7} = {2EEA1F0A-EC08-477B-9202-EE10BFA737E5}
 		{F37CAE31-0356-4F92-8FC2-AB1CDA064271} = {245F1648-BB3A-4D55-9AAD-175BF4DAB9C7}
 		{4648F6BC-9F01-48DC-ADA7-3B947E2A4FA6} = {245F1648-BB3A-4D55-9AAD-175BF4DAB9C7}
+		{A2BA2378-F417-475A-9AB6-CA3B9C82441C} = {9666F880-CD9D-4B02-8B95-D870FB483000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
