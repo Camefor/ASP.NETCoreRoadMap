@@ -3,14 +3,16 @@
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
+
+
         //C# 异步编程基础知识
 
         //Task
         //Task<T>
 
-        Task.Delay(TimeSpan.FromSeconds(1)); //用于延时执行任务，只能用于异步等待任务，等待过程中不会影响UI操作，仍能保持界面操作流畅；
+        await Task.Delay(TimeSpan.FromSeconds(1)); //用于延时执行任务，只能用于异步等待任务，等待过程中不会影响UI操作，仍能保持界面操作流畅；
         Console.WriteLine("im here");
 
         Thread.Sleep(TimeSpan.FromSeconds(1));//如果不通过异步方法来执行，会影响到UI操作，休眠期间界面有停顿现象。
@@ -69,6 +71,15 @@ internal class Program
         // 改进： 从C# 5,.NET 4.5时 引入 async await 关键字 以及Task.Run 方法。在TAP基础上改进模型、
 
 
+        //async 是一个修饰符
+        //await 是一个运算符可将其用于表达式中 该运算符表示等待异步执行的结果。
+        //await运算符和同步编程的最大区别是：异步等待任务完成时，既不会继续执行其后面的代码，也不好影响用户对UI界面的操作。
+        Task task1 = Method1Async();
+        await task1;
+
+        await Method1Async();
+
+
         Console.ReadKey();
 
     }
@@ -81,5 +92,11 @@ internal class Program
     private static void ShowMessage(string message)
     {
         Console.WriteLine(message);
+    }
+
+    private static async Task Method1Async()
+    {
+        Console.WriteLine("i am Method1Async");
+        await Task.Delay(TimeSpan.FromSeconds(1));
     }
 }
