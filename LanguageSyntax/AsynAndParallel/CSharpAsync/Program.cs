@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using CSharpAsync;
+using System.Threading.Tasks;
 
 
 internal class Program
@@ -9,39 +10,19 @@ internal class Program
 
         //C# 异步编程基础知识
 
-        //Task
-        //Task<T>
+        //LearnTask.TestDemo();
 
         await Task.Delay(TimeSpan.FromSeconds(1)); //用于延时执行任务，只能用于异步等待任务，等待过程中不会影响UI操作，仍能保持界面操作流畅；
         Console.WriteLine("im here");
 
-        Thread.Sleep(TimeSpan.FromSeconds(1));//如果不通过异步方法来执行，会影响到UI操作，休眠期间界面有停顿现象。
-        Console.WriteLine("im here now");
+        Task_vs_Thread_Differences.TestDemo2();
 
-        Console.WriteLine("------------------------\r\n");
+        Console.ReadKey();
+    }
 
 
-        //Lambda表达式 主要用于简化委托的代码编写。
-        //lambda的概念建立在委托的基础上
-        //Lambda表达式本质上就是一种匿名委托。
+    
 
-        //委托本质上仍旧是一个类，该类继承自 System.MulticastDelegate 类，该类维护一个带有链接的委托列表，在调用多播委托时，将按照委托列表的委托顺序而调用的。
-        //还包括一个接受两个参数的构造函数和 3 个重要方法：BeginInvoke、EndInvoke 和 Invoke。
-
-        //.NET 的事件模型建立在委托机制之上，事件是对委托的封装
-
-        //凡是能使用匿名委托的地方，都可以用Lambda表达式来实现
-
-        //Action 和 Func 委托
-
-        //Action委托封装了不带返回值的方法 (有0-16个输入参数，返回类型为 void )
-        //Func委托封装了带返回值的方法 (有0-16个输入参数，返回类型为 TResult )
-
-        Action actionDemo = () => SomeMethod();
-        actionDemo();
-
-        Action<string> a = ShowMessage;
-        a("OK");
 
         Func<int, string, bool> funcDemo = (int x, string s) => s.Length > x;
         Console.WriteLine(funcDemo(3, "hello"));

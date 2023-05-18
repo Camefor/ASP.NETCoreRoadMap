@@ -1,5 +1,32 @@
 ﻿namespace HelloCSharp
 {
+    public class MyException : Exception
+    {
+
+        /// <summary>
+        /// 错误消息（支持 Object 对象）
+        /// </summary>
+        public object ErrorMessage { get; set; }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public MyException() : base()
+        {
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="errorCode"></param>
+        public MyException(string message) : base(message)
+        {
+            ErrorMessage = message;
+        }
+
+    }
+
     internal class Program
     {
         static void Main(string[] args)
@@ -30,10 +57,15 @@
                 {
                     res_msg = "模拟异常 即将抛出异常";
 
-                    throw new Exception("模拟异常");
+                    throw new MyException("模拟异常");
                 }
                 res_msg = "我是返回的数据";
                 return "我是返回的数据";
+            }
+            catch (MyException mex)
+            {
+                throw;
+
             }
             catch (Exception ex)
             {
