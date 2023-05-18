@@ -4,6 +4,7 @@
     //声明委托:
     //委托类
     delegate void MyDele(); //独立在namespace外层，也说明了是一个类 类型
+    //delegate int MyDele(int a, int b);
 
     class Student
     {

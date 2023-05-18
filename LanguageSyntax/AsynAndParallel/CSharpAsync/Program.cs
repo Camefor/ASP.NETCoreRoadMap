@@ -1,8 +1,8 @@
 ﻿using CSharpAsync;
 using System.Threading.Tasks;
 
-
-internal class Program
+namespace CSharpAsync;
+class Program
 {
     private static async Task Main(string[] args)
     {
@@ -18,10 +18,6 @@ internal class Program
         Task_vs_Thread_Differences.TestDemo2();
 
         Console.ReadKey();
-    }
-
-
-    
 
 
         Func<int, string, bool> funcDemo = (int x, string s) => s.Length > x;
@@ -62,7 +58,6 @@ internal class Program
 
 
         Console.ReadKey();
-
     }
 
     private static void SomeMethod()
@@ -81,3 +76,4 @@ internal class Program
         await Task.Delay(TimeSpan.FromSeconds(1));
     }
 }
+
