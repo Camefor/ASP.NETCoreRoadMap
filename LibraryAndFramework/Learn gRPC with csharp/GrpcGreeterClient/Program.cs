@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Grpc.Core.Interceptors;
 
 namespace GrpcGreeterClient
 {
@@ -12,7 +13,17 @@ namespace GrpcGreeterClient
 
         static async Task Main(string[] args)
         {
-            using var channel = Grpc.Net.Client.GrpcChannel.ForAddress("https://localhost:7042");
+            //gRPC 客户端是通过通道创建的。 首先使用 GrpcChannel.ForAddress 创建一个通道，然后使用该通道创建 gRPC 客户端
+            //配置客户端选项:https://docs.microsoft.com/zh-cn/aspnet/core/grpc/configuration?view=aspnetcore-6.0#configure-client-options
+            using var channel = GrpcChannel.ForAddress("https://localhost:7042", new GrpcChannelOptions
+            {
+                MaxReceiveMessageSize = 5 * 1024 * 1024, // 5 MB
+                MaxSendMessageSize = 2 * 1024 * 1024 // 2 MB
+            });
+            //客户端侦听器
+            //var callInvoker = channel.Intercept(new LoggingInterceptor());
+
+
             //channel.ShutdownAsync().Wait();
 
             //var greeterClient = new Greeter.GreeterClient(channel);//编译生成项目之后。
@@ -22,13 +33,13 @@ namespace GrpcGreeterClient
             //Console.WriteLine("Greeting:    " + reply.Message);
 
 
-            var exampleClient = new Example.ExampleClient(channel);
-            //一元方法
-            for (int i = 0; i < 10; i++)
-            {
-                var exampleServerReply = await exampleClient.UnaryCallAsync(new ExampleRequest { IsDescending = false, PageIndex = 1, PageSize = 100 });
-                Console.WriteLine("Greeting:    " + exampleServerReply.Message);
-            }
+            //var exampleClient = new Example.ExampleClient(channel);
+            ////一元方法
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    var exampleServerReply = await exampleClient.UnaryCallAsync(new ExampleRequest { IsDescending = false, PageIndex = 1, PageSize = 100 });
+            //    Console.WriteLine("Greeting:    " + exampleServerReply.Message);
+            //}
 
 
             ////服务器流式处理方法
@@ -49,15 +60,33 @@ namespace GrpcGreeterClient
             //    Console.WriteLine(ex.Message);
             //}
 
-            //客户端流式处理方法
-            //for (int i = 0; i < 5; i++)
+            //2:
+
+            //var client = new Example.ExampleClient(channel);
+            //using var call = client.StreamingFromServer(new ExampleRequest { PageIndex = 1, PageSize = 100, IsDescending = false });
+
+            //await foreach (var response in call.ResponseStream.ReadAllAsync())
             //{
-            //    var exampleClientResult = exampleClient.StreamingFromClient();
-            //    Console.WriteLine("current index is " + i);
-            //    await exampleClientResult.RequestStream.WriteAsync(new ExampleRequest { IsDescending = false, PageIndex = i, PageSize = 666 }); //输入参数
-            //    Console.WriteLine((await exampleClientResult.ResponseAsync).Message);
+            //    Console.WriteLine("Greeting: " + response.Message);
+            //    // "Greeting: Hello World" is written multiple times
             //}
 
+
+
+            //客户端流式处理方法:
+            //客户端无需发送消息即可开始客户端流式处理调用 。
+            //客户端可选择使用 RequestStream.WriteAsync 发送消息。
+            //客户端发送完消息后，应调用 RequestStream.CompleteAsync() 来通知服务。 服务返回响应消息时，调用完成。
+            //var client = new Example.ExampleClient(channel);
+            //using var call = client.StreamingFromClient();
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    Console.WriteLine("current index is " + i);
+            //    await call.RequestStream.WriteAsync(new ExampleRequest { IsDescending = false, PageIndex = i, PageSize = 666 }); //输入参数
+            //}
+            //await call.RequestStream.CompleteAsync();
+            //var response = await call;
+            //Console.WriteLine(response.Message);
 
             //双向流式处理方法
             //var exampleClientResult = exampleClient.StreamingBothWays();
@@ -70,6 +99,35 @@ namespace GrpcGreeterClient
             //    var message = exampleClientResult.ResponseStream.Current; //获取响应
             //    Console.WriteLine(message?.Message);
             //}
+
+            var client = new Example.ExampleClient(channel);
+            using var call = client.StreamingBothWays();
+            Console.WriteLine("Starting background task to receive messages");
+
+            var readTask = Task.Run(async () =>
+            {
+                await foreach (var response in call.ResponseStream.ReadAllAsync())
+                {
+                    Console.WriteLine(response.Message);
+                }
+            });
+
+            Console.WriteLine("Starting to send messages");
+            Console.WriteLine("Type a message to echo then press enter.");
+
+            while (true)
+            {
+                var result = Console.ReadLine();
+                if (string.IsNullOrEmpty(result))
+                {
+                    break;
+                }
+                await call.RequestStream.WriteAsync(new ExampleRequest { IsDescending = false, PageIndex = 1, PageSize = 666 });
+            }
+
+            Console.WriteLine("Disconnecting");
+            await call.RequestStream.CompleteAsync();
+            await readTask;
 
 
             Console.WriteLine("Press any key to exit……");
