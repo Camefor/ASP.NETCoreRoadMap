@@ -27,15 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "LibraryAndFra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextMessageLib", "LibraryAndFramework\LearnEasyNetQ\TextMessageLib\TextMessageLib.csproj", "{6A102824-6ABB-449E-A4B3-8FA3833B2C93}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NETCore", "ASP.NETCore", "{777E5CAE-3071-4AF7-8E85-40BE651D59DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET.Core", "ASP.NET.Core", "{777E5CAE-3071-4AF7-8E85-40BE651D59DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{63DF4BE7-4DAE-406F-BF78-79A50649A02D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Filters", "ASP.NETCore\Advanced\Filters\Filters.csproj", "{073AA274-7232-4414-B516-18B9BF0C4B09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Filters", "ASP.NET.Core\Advanced\Filters\Filters.csproj", "{073AA274-7232-4414-B516-18B9BF0C4B09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fundamentals", "Fundamentals", "{261D32FE-A3C1-4D9B-B312-6CDAE5A053F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloASP.NETCore-6.0", "ASP.NETCore\Fundamentals\HelloASPNETCore-6.0\HelloASP.NETCore-6.0.csproj", "{BAB9D309-31A4-412C-8773-DAE58579A98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloASP.NETCore-6.0", "ASP.NET.Core\Fundamentals\HelloASPNETCore-6.0\HelloASP.NETCore-6.0.csproj", "{BAB9D309-31A4-412C-8773-DAE58579A98B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdpartyLib", "ThirdpartyLib", "{9666F880-CD9D-4B02-8B95-D870FB483000}"
 EndProject
@@ -111,6 +111,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Downloader", "Downloader", "{F2EC44E1-04D9-4C10-91AE-27750CA6E696}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Downloader.Demo", "LibraryAndFramework\ThirdpartyLib\Downloader\Downloader.Demo\Downloader.Demo.csproj", "{D9F1107E-092D-4373-AC44-FCC3B78A5F21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "ASP.NET.Core\Advanced\Authentication\Authentication.csproj", "{F537F5EC-280C-4185-ACC7-01C723048E94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -230,6 +232,10 @@ Global
 		{D9F1107E-092D-4373-AC44-FCC3B78A5F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9F1107E-092D-4373-AC44-FCC3B78A5F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9F1107E-092D-4373-AC44-FCC3B78A5F21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F537F5EC-280C-4185-ACC7-01C723048E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F537F5EC-280C-4185-ACC7-01C723048E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F537F5EC-280C-4185-ACC7-01C723048E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F537F5EC-280C-4185-ACC7-01C723048E94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -282,6 +288,7 @@ Global
 		{489D432B-E108-4C54-AC0D-E06272578023} = {791FEEF1-8771-4158-B3D4-0646DDA35A4F}
 		{F2EC44E1-04D9-4C10-91AE-27750CA6E696} = {9666F880-CD9D-4B02-8B95-D870FB483000}
 		{D9F1107E-092D-4373-AC44-FCC3B78A5F21} = {F2EC44E1-04D9-4C10-91AE-27750CA6E696}
+		{F537F5EC-280C-4185-ACC7-01C723048E94} = {63DF4BE7-4DAE-406F-BF78-79A50649A02D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
