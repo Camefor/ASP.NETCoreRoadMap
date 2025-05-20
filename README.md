@@ -1,7 +1,7 @@
 # AspNetCore-Developer-Roadmap
 
 
-# 2024 加油 :smiley: :sunglasses:
+# 2025 加油 :smiley: :sunglasses:
 
 
 ## 学习算法-Algorithm
@@ -9,6 +9,7 @@
 ## 设计模式-DesignPatterns
 ## 语言语法-LanguageSyntax
 ## 库和框架-LibraryAndFramework
+## Web相关-ASP.NET.Core
 
 
 
