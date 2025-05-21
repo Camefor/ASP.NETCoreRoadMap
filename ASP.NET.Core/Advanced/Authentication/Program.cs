@@ -2,6 +2,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 
+// https://www.cnblogs.com/camefor/p/18887245 (关于 .NET 身份验证内部实现原理)
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
