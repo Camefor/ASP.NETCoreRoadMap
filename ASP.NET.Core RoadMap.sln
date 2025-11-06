@@ -116,6 +116,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "ASP.NET.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization", "ASP.NET.Core\Advanced\Authorization\Authorization.csproj", "{4E124365-79F0-4F90-A1FC-9CF54C539446}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploader", "ASP.NET.Core\Fundamentals\FileUploader\FileUploader.csproj", "{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -242,6 +244,10 @@ Global
 		{4E124365-79F0-4F90-A1FC-9CF54C539446}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E124365-79F0-4F90-A1FC-9CF54C539446}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E124365-79F0-4F90-A1FC-9CF54C539446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -296,6 +302,7 @@ Global
 		{D9F1107E-092D-4373-AC44-FCC3B78A5F21} = {F2EC44E1-04D9-4C10-91AE-27750CA6E696}
 		{F537F5EC-280C-4185-ACC7-01C723048E94} = {63DF4BE7-4DAE-406F-BF78-79A50649A02D}
 		{4E124365-79F0-4F90-A1FC-9CF54C539446} = {63DF4BE7-4DAE-406F-BF78-79A50649A02D}
+		{9BFD7A9D-F6D7-4E3C-808E-3182D1F340F3} = {261D32FE-A3C1-4D9B-B312-6CDAE5A053F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
