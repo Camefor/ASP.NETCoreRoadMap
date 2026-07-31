@@ -1,0 +1,59 @@
+// gRPC 使用协定优先方法进行 API 开发。 默认情况下，协议缓冲区 (protobuf) 用作接口定义语言 (IDL)。 .proto 文件包含：
+// gRPC 服务的定义。
+// 在客户端与服务器之间发送的消息。
+
+
+ // gRPC 支持的 10 种默认语言中的每一种都有多个层，允许您自定义应用程序中所需的部分。
+// gRPC 中有三个主要堆栈：C-core、Go 和 Java。大多数语言都是基于 C 的 gRPC 核心库：
+// C# 语言
+// https://grpc.io/img/grpc-core-stack.svg
+
+
+//gRPC 使用 Protobuf 作为其接口定义语言 (IDL)。 Protobuf IDL 是一种中性语言格式，用于指定 gRPC 服务发送和接收的消息。 Protobuf 消息在 .proto 文件中定义
+
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";  
+
+
+option csharp_namespace = "GrpcGreeter"; //gRPC 支持可选的包说明符，它的功能非常类似于 .NET 命名空间
+
+package example; //如果 .proto 文件中未设置 option csharp_namespace，则将 package 用作生成的 .NET 类型的 .NET 命名空间。 
+
+
+
+service Example{
+	// 简单 RPC（Unary RPC） 一般的rpc调用，传入一个请求对象，返回一个返回对象；一般的rpc调用，传入一个请求对象，返回一个返回对象
+	rpc UnaryCall(ExampleRequest) returns (ExampleResponse); 
+
+	//服务端流式 RPC	 传入一个请求对象，服务端可以返回多个结果对象 ,
+	//典型的例子是客户端向服务端发送一个股票代码，服务端就把该股票的实时数据源源不断的返回给客户端
+	rpc StreamingFromServer(ExampleRequest)  returns (stream ExampleResponse);
+
+	// 客户端流式rpc 应用场景： 物联网终端向服务器报送数据。
+	  rpc StreamingFromClient (stream ExampleRequest) returns (ExampleResponse);
+
+	// 双向流式rpc 结合客户端流式rpc和服务端流式rpc，可以传入多个对象，返回多个响应对象
+	//proto语法 :应用场景：聊天应用。
+	rpc StreamingBothWays (stream ExampleRequest) returns (stream ExampleResponse);
+}
+
+
+// message : 消息是 Protobuf 中的主要数据传输对象。 它们在概念上类似于 .NET 类。
+
+//Protobuf 标量值类型 https://docs.microsoft.com/zh-cn/aspnet/core/grpc/protobuf?view=aspnetcore-6.0#scalar-value-types
+//Protobuf 样式指南  https://developers.google.com/protocol-buffers/docs/style
+message ExampleRequest{
+	 int32 pageIndex = 1;
+    int32 pageSize = 2;
+    bool isDescending = 3;
+}
+
+message ExampleResponse {
+  string message = 1;
+}
+
+
+message PersonDemo{
+	repeated string roles = 8;//Protobuf 中，在字段上使用 repeated 前缀关键字指定列表。
+}

@@ -1,0 +1,5 @@
+单一责任原则 (SRP)：
+https://www.dotnetcurry.com/software-gardening/1148/solid-single-responsibility-principle
+
+开放封闭原则 (OCP)：
+https://www.dotnetcurry.com/software-gardening/1176/solid-open-closed-principle

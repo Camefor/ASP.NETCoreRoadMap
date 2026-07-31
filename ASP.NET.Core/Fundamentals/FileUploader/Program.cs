@@ -1,0 +1,240 @@
+﻿using System.Net.Sockets;
+using System.Net;
+using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Net.Http.Headers;
+using System.Security.Cryptography;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = null; //无限制请求体大小
+});
+
+// Add services to the container.
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+
+app.UseHttpsRedirection();
+
+app.MapPost("/upload", async (Microsoft.AspNetCore.Http.HttpContext context) =>
+{
+    var logger = context.RequestServices.GetService<ILogger<Program>>();
+
+    var request = context.Request;
+    var response = context.Response;
+
+    string? contentType = request.ContentType;
+    if (contentType is null)
+    {
+        return;
+    }
+
+    MediaTypeHeaderValue mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
+    var contentTypeBoundary = mediaTypeHeaderValue.Boundary;
+    var boundary = HeaderUtilities.RemoveQuotes(contentTypeBoundary).Value!;
+    var multipartReader = new MultipartReader(boundary, request.Body, 1024);
+
+    await response.StartAsync();
+
+    while (true)
+    {
+        MultipartSection? multipartSection = await multipartReader.ReadNextSectionAsync();
+        if (multipartSection == null)
+        {
+            //读取完成了
+            break;
+        }
+
+        ContentDispositionHeaderValue? contentDispositionHeaderValue = multipartSection.GetContentDispositionHeader();
+
+        if (contentDispositionHeaderValue is null)
+        {
+            continue;
+        }
+
+        // ContentType=application/octet-stream
+        // form-data; name="file"; filename="Input.zip"
+
+        if (contentDispositionHeaderValue.IsFileDisposition())
+        {
+            var fileMultipartSection = multipartSection.AsFileSection();
+            if (fileMultipartSection?.FileStream is null)
+            {
+                continue;
+            }
+
+            // 可在此判断表单的各项内容。如判断是 Foo1 的就保存文件，是 TheFile 的就计算哈希值
+            if (fileMultipartSection.Name == "Foo1")
+            {
+                // 文件
+                var fileName = fileMultipartSection.FileName;
+                fileName = GetSafeFileName(fileName);
+                // 处理文件上传逻辑，例如保存文件
+                // 这里简单地将文件保存到临时目录。小心，生产环境中请确保文件名安全，小心被攻击
+                var filePath = Path.Join(Path.GetTempPath(), $"Uploaded_{fileName}");
+                await using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read,
+                    10240,
+                    // 确保文件在关闭后被删除，以防止临时文件堆积。此仅仅为演示需求，避免临时文件太多。请根据你的需求决定是否使用此选项
+                    FileOptions.DeleteOnClose);
+                await fileMultipartSection.FileStream.CopyToAsync(fileStream);
+
+                // 完成文件写入之后，可以通过以下代码，直接读取文件的内容
+                fileStream.Position = 0;
+                // 此时就可以立刻读取 FileStream 的内容了
+                logger.LogInformation($"Received file '{fileName}', saved to '{filePath}'");
+            }
+            else if (fileMultipartSection.Name == "TheFile")
+            {
+                using var sha1 = SHA1.Create();
+                var hashByteList = await sha1.ComputeHashAsync(fileMultipartSection.FileStream);
+                var hashString = Convert.ToHexString(hashByteList);
+                logger.LogInformation($"Received file '{fileMultipartSection.FileName}', SHA1: {hashString}");
+                await using var streamWriter = new StreamWriter(response.Body, leaveOpen: true);
+                await streamWriter.WriteLineAsync($"Received file '{fileMultipartSection.FileName}', SHA1: {hashString}");
+            }
+        }
+        else
+        {
+            // 普通表单字段
+            var formMultipartSection = multipartSection.AsFormDataSection();
+            if (formMultipartSection is null)
+            {
+                continue;
+            }
+
+            var name = formMultipartSection.Name;
+            var value = await formMultipartSection.GetValueAsync();
+
+            logger.LogInformation($"Received form field '{name}': {value}");
+        }
+    }
+
+    await response.CompleteAsync();
+});
+
+app.Run();
+
+static string GetSafeFileName(string arbitraryString)
+{
+    var invalidChars = System.IO.Path.GetInvalidFileNameChars();
+    var replaceIndex = arbitraryString.IndexOfAny(invalidChars, 0);
+    if (replaceIndex == -1) return arbitraryString;
+
+    var r = new StringBuilder();
+    var i = 0;
+
+    do
+    {
+        r.Append(arbitraryString, i, replaceIndex - i);
+
+        switch (arbitraryString[replaceIndex])
+        {
+            case '"':
+                r.Append("''");
+                break;
+            case '<':
+                r.Append('\u02c2'); // '˂' (modifier letter left arrowhead)
+                break;
+            case '>':
+                r.Append('\u02c3'); // '˃' (modifier letter right arrowhead)
+                break;
+            case '|':
+                r.Append('\u2223'); // '∣' (divides)
+                break;
+            case ':':
+                r.Append('-');
+                break;
+            case '*':
+                r.Append('\u2217'); // '∗' (asterisk operator)
+                break;
+            case '\\':
+            case '/':
+                r.Append('\u2044'); // '⁄' (fraction slash)
+                break;
+            case '\0':
+            case '\f':
+            case '?':
+                break;
+            case '\t':
+            case '\n':
+            case '\r':
+            case '\v':
+                r.Append(' ');
+                break;
+            default:
+                r.Append('_');
+                break;
+        }
+
+        i = replaceIndex + 1;
+        replaceIndex = arbitraryString.IndexOfAny(invalidChars, i);
+    } while (replaceIndex != -1);
+
+    r.Append(arbitraryString, i, arbitraryString.Length - i);
+
+    return r.ToString();
+}
+
+static int GetAvailablePort(IPAddress ip)
+{
+    using var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+    socket.Bind(new IPEndPoint(ip, 0));
+    socket.Listen(1);
+    var ipEndPoint = (IPEndPoint)socket.LocalEndPoint!;
+    var port = ipEndPoint.Port;
+    return port;
+}
+
+class FakeLongStream : Stream
+{
+    public override bool CanRead => true;
+    public override bool CanSeek => false;
+    public override bool CanWrite => false;
+    public override long Length => int.MaxValue / 2;
+    public override long Position { get; set; }
+
+    public override void Flush()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override int Read(byte[] buffer, int offset, int count)
+    {
+        if (Position == Length)
+        {
+            return 0;
+        }
+
+        Position += count;
+
+        Random.Shared.NextBytes(buffer.AsSpan(offset, count));
+
+        if (Position < Length)
+        {
+            return count;
+        }
+
+        var result = (int)(Length - (Position - count));
+        Position = Length;
+        return result;
+    }
+
+    public override long Seek(long offset, SeekOrigin origin)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SetLength(long value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Write(byte[] buffer, int offset, int count)
+    {
+        throw new NotImplementedException();
+    }
+}
