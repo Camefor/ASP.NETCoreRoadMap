@@ -128,6 +128,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordsInCSharp", "Languag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpBasic", "LanguageSyntax\HelloCSharp\CSharpBasic\CSharpBasic.csproj", "{09E2D931-B5B8-4EA2-9AAF-1B5FA0E9252B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{30B8BAB7-AA37-4A25-AEB4-473E6E7B9E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncSnapshotPipelineDemo", "Advanced\AsyncSnapshotPipelineDemo\AsyncSnapshotPipelineDemo.csproj", "{F2A48F16-3571-B41A-2B79-9AFA2EADDA58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -270,6 +274,10 @@ Global
 		{09E2D931-B5B8-4EA2-9AAF-1B5FA0E9252B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E2D931-B5B8-4EA2-9AAF-1B5FA0E9252B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E2D931-B5B8-4EA2-9AAF-1B5FA0E9252B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2A48F16-3571-B41A-2B79-9AFA2EADDA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2A48F16-3571-B41A-2B79-9AFA2EADDA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2A48F16-3571-B41A-2B79-9AFA2EADDA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2A48F16-3571-B41A-2B79-9AFA2EADDA58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -330,6 +338,7 @@ Global
 		{7CA38616-C4D9-4B40-8A01-AE30F3E93E58} = {8672CC71-F34E-4BCA-85BF-EC2EFEBA8E39}
 		{820C71D8-FBC5-4ED9-A959-77D66600864D} = {7CA38616-C4D9-4B40-8A01-AE30F3E93E58}
 		{09E2D931-B5B8-4EA2-9AAF-1B5FA0E9252B} = {7CA38616-C4D9-4B40-8A01-AE30F3E93E58}
+		{F2A48F16-3571-B41A-2B79-9AFA2EADDA58} = {30B8BAB7-AA37-4A25-AEB4-473E6E7B9E2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434CCC68-8427-4BB7-9841-FA5DC0669DB4}
